@@ -66,11 +66,10 @@
   --text-body-md--font-weight: 400;
 }
 
-body {
-  background-color: #050505;
-  color: #ffffff;
-  overflow-x: hidden;
-  font-family: var(--font-geist-sans), sans-serif;
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 .noise-overlay {
@@ -99,26 +98,12 @@ body {
   z-index: 0;
 }
 
-#cursor-spotlight {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 50vmax;
-  height: 50vmax;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 10;
-  mix-blend-mode: screen;
-}
 
 .bg-glow {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.1;
   z-index: 0;
-  animation: pulse-glow 10s infinite alternate ease-in-out;
 }
 
 .glow-1 {
@@ -130,29 +115,6 @@ body {
   transform: translate(50%, -50%);
 }
 
-@keyframes pulse-glow {
-  0% {
-    transform: scale(1);
-    opacity: 0.05;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 0.1;
-  }
-}
-
-@keyframes float-hero {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float-hero {
-  animation: float-hero 10s ease-in-out infinite;
-}
 
 .glass-card {
   background: rgba(255, 255, 255, 0.02);
@@ -203,23 +165,6 @@ body {
     left: 50%;
     transform: translateX(-50%);
   }
-}
-
-/* Nav Transition */
-nav a {
-  transition: all 0.3s ease-out;
-}
-
-/* Animations */
-.fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Stroke effect text */

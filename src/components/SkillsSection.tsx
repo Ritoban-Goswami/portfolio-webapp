@@ -1,0 +1,45 @@
+import FadeUpSection from "@/components/FadeUpSection";
+
+const skills = [
+  {
+    label: "01 // Languages",
+    items: ["JavaScript", "TypeScript", "Python", "SQL"],
+  },
+  {
+    label: "02 // Frontend",
+    items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+  },
+  {
+    label: "03 // Backend",
+    items: ["Node.js", "PostgreSQL", "AWS", "Docker"],
+  },
+];
+
+export default function SkillsSection() {
+  return (
+    <FadeUpSection className="py-40 mt-24 max-w-6xl mx-auto" id="skills">
+      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-32 text-center tracking-tight font-extrabold">
+        Technical <span className="text-on-background/40 italic font-light">Arsenal</span>
+      </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        {skills.map(({ label, items }) => (
+          <div key={label} className="glass-card p-12">
+            <h3 className="font-headline-md text-xl text-on-background mb-10 flex items-center gap-4 font-semibold tracking-wide">
+              <span className="text-on-background/20 font-mono-label text-sm uppercase">{label}</span>
+            </h3>
+            <div className="flex flex-wrap gap-4">
+              {items.map((item) => (
+                <span
+                  key={item}
+                  className="px-5 py-2.5 bg-transparent border border-on-background/10 text-sm font-light text-on-background/70 hover:border-on-background/40 hover:text-on-background transition-all cursor-default"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </FadeUpSection>
+  );
+}
