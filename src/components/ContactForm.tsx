@@ -72,7 +72,7 @@ export default function ContactForm() {
           required
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-        ></textarea>
+         />
       </div>
       <div className="mt-10 flex justify-center">
         <button

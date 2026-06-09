@@ -112,7 +112,7 @@ export default function ProjectsSection() {
           className="absolute inset-0 bg-background/90 backdrop-blur-md"
           onClick={() => setActiveProject(null)}
           aria-hidden="true"
-        ></div>
+         />
         <div
           className={`modal-content relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card rounded-none border border-on-background/10 shadow-2xl bg-surface-container-low transition-all duration-300 ${activeProject ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
             }`}
