@@ -15,6 +15,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ritoban Goswami — Full-Stack Engineer",
   description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS. Bridging the gap between physics logic and software architecture.",
+  openGraph: {
+    title: "Ritoban Goswami — Full-Stack Engineer",
+    description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS.",
+    url: "https://ritobangoswami.dev",
+    siteName: "Ritoban Goswami",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ritoban Goswami — Full-Stack Engineer",
+    description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS.",
+  },
 };
 
 export default function RootLayout({
