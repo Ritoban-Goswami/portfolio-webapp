@@ -3,14 +3,14 @@ import { Code2, Briefcase, X as XIcon, Zap } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 w-full py-20 bg-surface-container-lowest border-t border-on-background/5 flex flex-col items-center gap-12 text-center">
+    <footer className="relative z-10 w-full pt-20 pb-5 bg-surface-container-lowest border-t border-on-background/5 flex flex-col items-center gap-12 text-center">
       <div className="flex justify-between items-center w-full max-w-[1200px] px-6 md:px-12 flex-col md:flex-row gap-10">
         <Image
           alt="Ritoban Goswami Logo"
-          className="h-14 w-20 object-cover rounded-md opacity-30 hover:opacity-100 transition-opacity"
+          className="object-cover rounded-md opacity-30 hover:opacity-100 transition-opacity"
           src="/logo.svg"
-          width={80}
-          height={56}
+          width={176}
+          height={96}
         />
         <div className="flex gap-10">
           <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
@@ -24,7 +24,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div className="w-full max-w-[1200px] px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono-label tracking-widest text-on-background/30 uppercase">
+      <div className="w-full max-w-[1200px] pt-15 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono-label tracking-widest text-on-background/30 uppercase">
         <p>© {new Date().getFullYear()} Ritoban Goswami.</p>
         <p className="flex items-center gap-2">
           Built for performance <Zap size={12} className="text-primary" />
