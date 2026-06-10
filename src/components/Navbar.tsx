@@ -8,11 +8,13 @@ export default function Navbar() {
         <a href="#" aria-label="Go to top of page" className="pointer-events-auto">
           <Image
             alt="Ritoban Goswami Logo"
-            className="object-cover rounded-md opacity-80 hover:opacity-100 transition-opacity duration-300"
+            className="rounded-md opacity-80 hover:opacity-100 transition-opacity duration-300"
             src="/logo.svg"
             width={176}
             height={96}
+            style={{ width: "176px", height: "auto" }}
             priority
+            loading="eager"
           />
         </a>
 

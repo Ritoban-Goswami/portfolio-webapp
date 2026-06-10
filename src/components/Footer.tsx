@@ -7,10 +7,11 @@ export default function Footer() {
       <div className="flex justify-between items-center w-full max-w-[1200px] px-6 md:px-12 flex-col md:flex-row gap-10">
         <Image
           alt="Ritoban Goswami Logo"
-          className="object-cover rounded-md opacity-30 hover:opacity-100 transition-opacity"
+          className="rounded-md opacity-30 hover:opacity-100 transition-opacity"
           src="/logo.svg"
           width={176}
           height={96}
+          style={{ width: "176px", height: "auto" }}
         />
         <div className="flex gap-10">
           <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
