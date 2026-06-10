@@ -3,16 +3,16 @@ import Image from "next/image";
 export default function Navbar() {
   return (
     <header className="fixed top-0 w-full z-40 pointer-events-none">
-      <div className="flex justify-between items-center max-w-[1400px] mx-auto px-6 md:px-12 h-36 pointer-events-none">
+      <div className="flex justify-between items-center max-w-[1400px] mx-auto px-6 md:px-12 h-24 pointer-events-none">
 
         <a href="#" aria-label="Go to top of page" className="pointer-events-auto">
           <Image
             alt="Ritoban Goswami Logo"
             className="rounded-md opacity-80 hover:opacity-100 transition-opacity duration-300"
-            src="/logo.svg"
+            src="/logo.webp"
             width={176}
             height={96}
-            style={{ width: "176px", height: "auto" }}
+            style={{ width: "80px", height: "auto", marginTop: '1rem' }}
             priority
             loading="eager"
           />

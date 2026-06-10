@@ -16,16 +16,12 @@ export default function SpotlightCursor() {
   const ringX = useSpring(mouseX, { stiffness: 180, damping: 32, mass: 0.6 });
   const ringY = useSpring(mouseY, { stiffness: 180, damping: 32, mass: 0.6 });
 
-  const auraX = useSpring(mouseX, { stiffness: 60, damping: 22, mass: 1.2 });
-  const auraY = useSpring(mouseY, { stiffness: 60, damping: 22, mass: 1.2 });
-
   useEffect(() => {
     const interactiveSelector = "a, button, input, textarea, select, [role='button'], [data-cursor-hover]";
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!visible) setVisible(true);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -39,9 +35,9 @@ export default function SpotlightCursor() {
     const handleMouseLeave = () => setVisible(false);
     const handleMouseEnter = () => setVisible(true);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    window.addEventListener("mouseout", handleMouseOut, { passive: true });
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
@@ -52,26 +48,10 @@ export default function SpotlightCursor() {
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, visible]);
+  }, [mouseX, mouseY]);
 
   return (
     <div aria-hidden="true" style={{ opacity: visible ? 1 : 0, transition: "opacity 0.4s ease" }}>
-
-      {/* Ambient aura — very soft, slow-lagging bloom */}
-      <motion.div
-        className="pointer-events-none fixed rounded-full"
-        style={{
-          x: auraX,
-          y: auraY,
-          translateX: "-50%",
-          translateY: "-50%",
-          zIndex: 9997,
-          width: hovering ? 280 : 320,
-          height: hovering ? 280 : 320,
-          background: "radial-gradient(circle, rgba(255,31,31,0.055) 0%, transparent 65%)",
-          transition: "width 0.5s ease, height 0.5s ease",
-        }}
-      />
 
       {/* Ring — tracks with medium lag, expands on hover */}
       <motion.div
@@ -82,6 +62,7 @@ export default function SpotlightCursor() {
           translateX: "-50%",
           translateY: "-50%",
           zIndex: 9998,
+          willChange: "transform",
           width: hovering ? 52 : 32,
           height: hovering ? 52 : 32,
           border: hovering
@@ -100,6 +81,7 @@ export default function SpotlightCursor() {
           translateX: "-50%",
           translateY: "-50%",
           zIndex: 9999,
+          willChange: "transform",
           width: hovering ? 3 : 4,
           height: hovering ? 3 : 4,
           background: hovering ? "rgba(255,31,31,0.9)" : "rgba(255,255,255,0.9)",

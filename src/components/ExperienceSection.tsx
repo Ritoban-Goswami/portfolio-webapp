@@ -5,7 +5,7 @@ export default function ExperienceSection() {
   return (
     <FadeUpSection className="py-40 mt-24" id="experience">
       <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-32 text-center tracking-tight font-extrabold">
-        Work <span className="text-on-background/40 italic font-light">Experience</span>
+        Work <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Experience</span>
       </h2>
       <div className="relative max-w-5xl mx-auto">
         <div className="timeline-track" />

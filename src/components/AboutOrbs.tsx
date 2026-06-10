@@ -1,19 +1,13 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function AboutOrbs() {
   return (
     <div className="relative flex justify-center items-center h-full min-h-[400px]">
-      <motion.div
+      <div
         className="absolute w-[300px] h-[300px] border border-on-background/5 rounded-full border-dashed"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+        style={{ animation: "spin-cw 20s linear infinite" }}
       />
-      <motion.div
+      <div
         className="absolute w-[200px] h-[200px] border border-on-background/5 rounded-full"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+        style={{ animation: "spin-ccw 15s linear infinite" }}
       />
       <div className="glass-card p-10 rounded-full w-64 h-64 flex flex-col items-center justify-center text-center z-10">
         <div className="font-headline-xl text-on-background font-black text-6xl leading-none mb-2">3+</div>

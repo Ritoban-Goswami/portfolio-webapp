@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+
+type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,12 +12,52 @@ export default function ContactForm() {
     type: "",
     message: "",
   });
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you, ${formData.name}! Your message was successfully logged (demonstration only).`);
-    setFormData({ name: "", email: "", type: "", message: "" });
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.error ?? "Something went wrong.");
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", type: "", message: "" });
+    } catch {
+      setErrorMsg("Network error. Please try again.");
+      setStatus("error");
+    }
   };
+
+  if (status === "success") {
+    return (
+      <div className="flex flex-col items-center justify-center gap-6 py-16 text-center">
+        <CheckCircle size={48} className="text-primary" />
+        <h3 className="font-headline-md text-2xl text-on-background font-semibold">Message sent!</h3>
+        <p className="text-on-background/50 font-body-md">I&apos;ll get back to you as soon as possible.</p>
+        <button
+          className="mt-4 text-on-background/40 hover:text-on-background font-mono-label text-xs uppercase tracking-widest transition-colors"
+          onClick={() => setStatus("idle")}
+        >
+          Send another
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form className="flex flex-col gap-12" onSubmit={handleFormSubmit}>
@@ -74,13 +116,27 @@ export default function ContactForm() {
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
         />
       </div>
+      {status === "error" && (
+        <div className="flex items-center gap-3 text-sm text-red-400 font-body-md">
+          <AlertCircle size={16} />
+          {errorMsg}
+        </div>
+      )}
       <div className="mt-10 flex justify-center">
         <button
-          className="bg-primary text-on-primary font-label-md text-sm uppercase tracking-widest px-14 py-6 rounded-none hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-[0.98] flex items-center gap-4"
+          className="bg-primary text-on-primary font-label-md text-sm uppercase tracking-widest px-14 py-6 rounded-none hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-[0.98] flex items-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
+          disabled={status === "loading"}
         >
-          Send Message
-          <ArrowRight size={16} />
+          {status === "loading" ? (
+            <>
+              Sending <Loader2 size={16} className="animate-spin" />
+            </>
+          ) : (
+            <>
+              Send Message <ArrowRight size={16} />
+            </>
+          )}
         </button>
       </div>
     </form>

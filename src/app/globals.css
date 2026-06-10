@@ -23,6 +23,7 @@
 
   --font-sans: var(--font-geist-sans), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-cormorant: var(--font-cormorant), serif;
 
   /* Custom typography settings from Stitch mockup */
   --text-mono-label: 12px;
@@ -66,11 +67,6 @@
   --text-body-md--font-weight: 400;
 }
 
-@media (pointer: fine) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
-}
 
 .noise-overlay {
   position: fixed;
@@ -81,8 +77,7 @@
   pointer-events: none;
   z-index: 9999;
   opacity: 0.06;
-  mix-blend-mode: screen;
-  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22 x=%220%22 y=%220%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22 result=%22noiseOut%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22 in=%22noiseOut%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22 x=%220%22 y=%220%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22 result=%22noiseOut%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22 in=%22noiseOut%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22/%3E%3C/svg%3E");
   background-size: 300px 300px;
   background-repeat: repeat;
 }
@@ -91,18 +86,18 @@
   position: absolute;
   inset: 0;
   background-size: 60px 60px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
   -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
   z-index: 0;
 }
 
-
 .bg-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(140px);
+  filter: blur(80px);
   z-index: 0;
 }
 
@@ -115,14 +110,17 @@
   transform: translate(50%, -50%);
 }
 
-
 .glass-card {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
@@ -192,4 +190,19 @@
 
 .input-line::placeholder {
   color: rgba(255, 255, 255, 0.3);
+}
+
+.font-cursive-heading {
+  font-family: var(--font-cormorant), serif;
+  font-style: italic;
+}
+
+@keyframes spin-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
