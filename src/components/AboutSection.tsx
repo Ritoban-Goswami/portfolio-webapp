@@ -8,7 +8,7 @@ export default function AboutSection() {
         <div>
           <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background font-extrabold mb-10 tracking-tight">
             From Physics to <br />
-            <span className="text-on-background/40 italic font-light">Engineering</span>.
+            <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold">Engineering.</span>
           </h2>
           <p className="font-body-md text-lg text-on-background/60 mb-8 font-light leading-relaxed">
             My journey started with physics, teaching me to break down complex systems into fundamental

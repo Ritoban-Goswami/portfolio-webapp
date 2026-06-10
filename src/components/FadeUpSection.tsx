@@ -18,7 +18,7 @@ export default function FadeUpSection({ children, className, id, delay = 0 }: Fa
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.section>

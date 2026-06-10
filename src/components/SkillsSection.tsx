@@ -19,7 +19,7 @@ export default function SkillsSection() {
   return (
     <FadeUpSection className="py-40 mt-24 max-w-6xl mx-auto" id="skills">
       <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-32 text-center tracking-tight font-extrabold">
-        Technical <span className="text-on-background/40 italic font-light">Arsenal</span>
+        Technical <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {skills.map(({ label, items }) => (

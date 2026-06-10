@@ -33,7 +33,7 @@ export default function ProjectsSection() {
       <section className="py-40 mt-24 fade-up max-w-6xl mx-auto" id="projects">
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
           <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background tracking-tight font-extrabold">
-            Featured <span className="text-on-background/40 italic font-light">Projects</span>
+            Featured <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Projects</span>
           </h2>
           <a
             className="text-on-background/50 hover:text-on-background font-mono-label text-xs uppercase tracking-widest flex items-center gap-2 transition-colors pb-2"

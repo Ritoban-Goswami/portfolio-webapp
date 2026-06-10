@@ -8,10 +8,10 @@ export default function Footer() {
         <Image
           alt="Ritoban Goswami Logo"
           className="rounded-md opacity-30 hover:opacity-100 transition-opacity"
-          src="/logo.svg"
+          src="/logo.webp"
           width={176}
           height={96}
-          style={{ width: "176px", height: "auto" }}
+          style={{ width: "90px", height: "auto" }}
         />
         <div className="flex gap-10">
           <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
