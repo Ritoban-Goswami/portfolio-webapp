@@ -30,7 +30,7 @@ export default function ProjectsSection() {
 
   return (
     <>
-      <section className="py-40 mt-24 fade-up max-w-6xl mx-auto" id="projects">
+      <section className="py-40 mt-24 max-w-6xl mx-auto" id="projects">
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
           <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background tracking-tight font-extrabold">
             Featured <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Projects</span>
@@ -102,7 +102,7 @@ export default function ProjectsSection() {
 
       {/* Project Detail Modal Overlay */}
       <div
-        className={`modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ${activeProject ? "active opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ${activeProject ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         role="dialog"
         aria-modal="true"

@@ -21,9 +21,8 @@
   --spacing-stack-md: 24px;
   --spacing-section-gap: 128px;
 
-  --font-sans: var(--font-geist-sans), sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
-  --font-cormorant: var(--font-cormorant), serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
 
   /* Custom typography settings from Stitch mockup */
   --text-mono-label: 12px;
@@ -195,6 +194,14 @@
 .font-cursive-heading {
   font-family: var(--font-cormorant), serif;
   font-style: italic;
+}
+
+.font-geist {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-cormorant {
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
 }
 
 @keyframes spin-cw {

@@ -12,10 +12,14 @@ export default function HeroSection() {
 
         <div className="lg:w-1/2 relative z-20 flex flex-col items-start text-left pt-20 lg:pt-0">
           <div className="relative w-full">
-            <h1 className="font-headline-xl text-[5rem] md:text-[8rem] lg:text-[10rem] text-on-background tracking-tight leading-[0.8] font-black uppercase relative z-20 mix-blend-difference">
+            <h1
+              className="font-headline-xl font-geist text-[5rem] md:text-[8rem] lg:text-[10rem] text-on-background tracking-tight leading-[0.8] font-black uppercase relative z-20 mix-blend-difference"
+            >
               Ritoban
             </h1>
-            <h1 className="font-headline-xl text-[4rem] md:text-[7rem] lg:text-[9rem] stroke-text tracking-tight leading-[0.8] font-black uppercase relative z-0 -mt-2 md:-mt-6 ml-4 md:ml-12">
+            <h1
+              className="font-headline-xl font-geist text-[4rem] md:text-[7rem] lg:text-[9rem] stroke-text tracking-tight leading-[0.8] font-black uppercase relative z-0 -mt-2 md:-mt-6 ml-4 md:ml-12"
+            >
               Goswami
             </h1>
           </div>
