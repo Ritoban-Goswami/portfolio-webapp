@@ -25,7 +25,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div className="w-full max-w-[1200px] pt-15 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono-label tracking-widest text-on-background/30 uppercase">
+      <div className="w-full max-w-[1200px] pt-16 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono-label tracking-widest text-on-background/30 uppercase">
         <p>© {new Date().getFullYear()} Ritoban Goswami.</p>
         <p className="flex items-center gap-2">
           Built for performance <Zap size={12} className="text-primary" />
