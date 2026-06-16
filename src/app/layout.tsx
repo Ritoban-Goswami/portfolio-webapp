@@ -21,8 +21,7 @@ export const metadata: Metadata = {
   title: "Ritoban Goswami — Full-Stack Engineer",
   description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS. Bridging the gap between physics logic and software architecture.",
   icons: {
-    icon: { url: "/favicon.svg", type: "image/svg+xml" },
-    apple: "/favicon.svg",
+    icon: "/favicon.svg",
   },
   openGraph: {
     title: "Ritoban Goswami — Full-Stack Engineer",
