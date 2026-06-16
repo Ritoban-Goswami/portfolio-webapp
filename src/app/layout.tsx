@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Cormorant_Garamond } from "next/font/google";
@@ -30,14 +30,18 @@ export const metadata: Metadata = {
     siteName: "Ritoban Goswami",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Ritoban Goswami — Full-Stack Engineer" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Ritoban Goswami — Full-Stack Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ritoban Goswami — Full-Stack Engineer",
     description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
 };
 
 export default function RootLayout({
@@ -50,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${cormorant.variable} h-full antialiased dark scroll-smooth`}
     >
-      <body className="min-h-full bg-background text-on-background font-sans overflow-x-hidden relative">
+      <body className="min-h-screen bg-background text-on-background font-sans overflow-x-hidden relative" style={{ backgroundColor: "#050505" }}>
         {children}
         <Analytics />
         <SpeedInsights />

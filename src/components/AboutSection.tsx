@@ -3,8 +3,8 @@ import AboutOrbs from "@/components/AboutOrbs";
 
 export default function AboutSection() {
   return (
-    <FadeUpSection className="py-40 mt-24 relative" id="about" delay={0.1}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
+    <FadeUpSection className="py-20 md:py-40 mt-12 md:mt-24 relative px-4 sm:px-6 lg:px-0" id="about" delay={0.1}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
         <div>
           <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background font-extrabold mb-10 tracking-tight">
             From Physics to <br />

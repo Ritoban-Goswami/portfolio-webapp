@@ -3,15 +3,15 @@ import FadeUpSection from "@/components/FadeUpSection";
 
 export default function ExperienceSection() {
   return (
-    <FadeUpSection className="py-40 mt-24" id="experience">
-      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-32 text-center tracking-tight font-extrabold">
+    <FadeUpSection className="py-20 md:py-40 mt-12 md:mt-24 px-4 sm:px-6 lg:px-0" id="experience">
+      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-32 text-center tracking-tight font-extrabold">
         Work <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Experience</span>
       </h2>
       <div className="relative max-w-5xl mx-auto">
         <div className="timeline-track" />
 
         {/* Appycodes */}
-        <div className="relative flex flex-col md:flex-row items-center justify-between mb-40 w-full group">
+        <div className="relative flex flex-col md:flex-row items-center justify-between mb-20 md:mb-40 w-full group">
           <div className="hidden md:block w-[45%] text-right pr-16">
             <span className="font-mono-label text-on-background/40 uppercase tracking-[0.2em] text-sm group-hover:text-on-background transition-colors duration-300">
               2022 - Present
@@ -24,9 +24,9 @@ export default function ExperienceSection() {
                 2022 - Present
               </span>
             </div>
-            <div className="glass-card p-12 rounded-none border-l-[1px] border-l-on-background/10 group-hover:border-l-primary">
+            <div className="glass-card p-6 sm:p-12 rounded-none border-l-[1px] border-l-on-background/10 group-hover:border-l-primary">
               <h3 className="font-headline-md text-2xl text-on-background mb-3 font-semibold">Software Engineer</h3>
-              <h4 className="font-body-md text-on-background/40 mb-10 uppercase tracking-widest text-xs">Appycodes</h4>
+              <h4 className="font-body-md text-on-background/40 mb-6 sm:mb-10 uppercase tracking-widest text-xs">Appycodes</h4>
               <ul className="space-y-6 font-body-md text-on-background/60 font-light">
                 <li className="flex items-start gap-4">
                   <Check size={18} className="text-on-background/30 mt-1 shrink-0" />
@@ -53,9 +53,9 @@ export default function ExperienceSection() {
                 2020 - 2022
               </span>
             </div>
-            <div className="glass-card p-12 rounded-none border-l-[1px] border-l-on-background/10 md:border-l-0 md:border-r-[1px] md:border-r-on-background/10 group-hover:border-l-primary md:group-hover:border-l-transparent md:group-hover:border-r-primary">
+            <div className="glass-card p-6 sm:p-12 rounded-none border-l-[1px] border-l-on-background/10 md:border-l-0 md:border-r-[1px] md:border-r-on-background/10 group-hover:border-l-primary md:group-hover:border-l-transparent md:group-hover:border-r-primary">
               <h3 className="font-headline-md text-2xl text-on-background mb-3 font-semibold">Founding Engineer</h3>
-              <h4 className="font-body-md text-on-background/40 mb-10 uppercase tracking-widest text-xs">Tellbyte</h4>
+              <h4 className="font-body-md text-on-background/40 mb-6 sm:mb-10 uppercase tracking-widest text-xs">Tellbyte</h4>
               <ul className="space-y-6 font-body-md text-on-background/60 font-light text-left md:text-right">
                 <li className="flex items-start md:flex-row-reverse gap-4">
                   <Check size={18} className="text-on-background/30 mt-1 shrink-0" />

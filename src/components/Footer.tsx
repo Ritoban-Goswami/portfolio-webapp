@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Code2, Briefcase, X as XIcon, Zap } from "lucide-react";
+import { Code2, Briefcase, Zap } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -14,14 +14,11 @@ export default function Footer() {
           style={{ width: "90px", height: "auto" }}
         />
         <div className="flex gap-10">
-          <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
+          <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="https://github.com/Ritoban-Goswami" target="_blank" rel="noopener noreferrer">
             <Code2 size={20} />
           </a>
-          <a aria-label="LinkedIn" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
+          <a aria-label="LinkedIn" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="https://www.linkedin.com/in/ritoban-goswami" target="_blank" rel="noopener noreferrer">
             <Briefcase size={20} />
-          </a>
-          <a aria-label="Twitter" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="#">
-            <XIcon size={20} />
           </a>
         </div>
       </div>

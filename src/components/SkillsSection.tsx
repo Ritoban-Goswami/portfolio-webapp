@@ -17,13 +17,13 @@ const skills = [
 
 export default function SkillsSection() {
   return (
-    <FadeUpSection className="py-40 mt-24 max-w-6xl mx-auto" id="skills">
-      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-32 text-center tracking-tight font-extrabold">
+    <FadeUpSection className="py-20 md:py-40 mt-12 md:mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-0" id="skills">
+      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-32 text-center tracking-tight font-extrabold">
         Technical <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {skills.map(({ label, items }) => (
-          <div key={label} className="glass-card p-12">
+          <div key={label} className="glass-card p-6 sm:p-12">
             <h3 className="font-headline-md text-xl text-on-background mb-10 flex items-center gap-4 font-semibold tracking-wide">
               <span className="text-on-background/20 font-mono-label text-sm uppercase">{label}</span>
             </h3>
