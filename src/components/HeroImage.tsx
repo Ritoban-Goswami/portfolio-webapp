@@ -1,11 +1,12 @@
 "use client";
 
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function HeroImage() {
+const HeroImage = forwardRef<HTMLDivElement>(function HeroImage(_, ref) {
   return (
-    <div className="lg:w-1/2 relative z-10 mt-12 sm:mt-20 lg:mt-0 flex justify-center lg:justify-end w-full">
+    <div ref={ref} className="lg:w-1/2 relative z-10 mt-12 sm:mt-20 lg:mt-0 flex justify-center lg:justify-end w-full" style={{ opacity: 0 }}>
       <motion.div
         className="relative w-full max-w-[320px] sm:max-w-[450px] md:max-w-[600px] aspect-[4/5]"
         animate={{ y: [0, -10, 0] }}
@@ -23,4 +24,6 @@ export default function HeroImage() {
       </motion.div>
     </div>
   );
-}
+});
+
+export default HeroImage;

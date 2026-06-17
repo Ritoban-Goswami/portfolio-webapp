@@ -1,21 +1,43 @@
+const stats = [
+  {
+    value: "3+",
+    label: "Years Experience",
+    context: "Full-cycle delivery across B2B & SaaS",
+  },
+  {
+    value: "200+",
+    label: "Features Shipped",
+    context: "Production, end-to-end ownership",
+  },
+  {
+    value: "32%",
+    label: "Faster Page Loads",
+    context: "Next.js App Router migration",
+  },
+  {
+    value: "40%",
+    label: "Faster Delivery",
+    context: "Via reusable component library",
+  },
+];
+
 export default function AboutOrbs() {
   return (
-    <div className="relative flex justify-center items-center h-full min-h-[400px]">
-      <div
-        className="absolute w-[300px] h-[300px] border border-on-background/5 rounded-full border-dashed"
-        style={{ animation: "spin-cw 20s linear infinite" }}
-      />
-      <div
-        className="absolute w-[200px] h-[200px] border border-on-background/5 rounded-full"
-        style={{ animation: "spin-ccw 15s linear infinite" }}
-      />
-      <div className="glass-card p-10 rounded-full w-64 h-64 flex flex-col items-center justify-center text-center z-10">
-        <div className="font-headline-xl text-on-background font-black text-6xl leading-none mb-2">3+</div>
-        <div className="font-mono-label text-on-background/50 uppercase tracking-[0.2em] text-xs">Years Exp</div>
-        <div className="w-12 h-px bg-on-background/10 my-4" />
-        <div className="font-headline-md text-on-background font-bold text-3xl leading-none mb-1">200+</div>
-        <div className="text-[10px] text-on-background/40 uppercase tracking-[0.2em]">Features Shipped</div>
-      </div>
+    <div className="grid grid-cols-2 gap-4">
+      {stats.map(({ value, label, context }) => (
+        <div key={label} className="glass-card p-6 flex flex-col justify-end min-h-[160px] group hover:border-on-background/10">
+          <div className="w-8 h-px bg-primary/50 mb-4 group-hover:bg-primary transition-colors duration-300" />
+          <div className="font-headline-lg text-3xl text-on-background font-extrabold tracking-tight leading-none mb-1">
+            {value}
+          </div>
+          <div className="font-mono-label text-[10px] uppercase tracking-[0.18em] text-on-background/50 mb-2">
+            {label}
+          </div>
+          <div className="font-body-md text-[11px] text-on-background/25 font-light leading-snug">
+            {context}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
