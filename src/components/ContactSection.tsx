@@ -1,5 +1,6 @@
 import FadeUpSection from "@/components/FadeUpSection";
 import ContactForm from "@/components/ContactForm";
+import { Mail } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -13,6 +14,16 @@ export default function ContactSection() {
           <p className="font-body-lg text-on-background/50 max-w-xl mx-auto font-light text-lg">
             Currently open to new opportunities. Reach out and I&apos;ll get back to you as soon as possible.
           </p>
+          <p className="font-body-md text-on-background/30 text-sm mt-6 font-light">
+            Or drop me a direct email at
+          </p>
+          <a
+            href="mailto:dev.ritoban.goswami@gmail.com"
+            className="inline-flex items-center gap-3 mt-3 text-on-background/60 hover:text-on-background transition-colors duration-300 font-mono-label text-sm tracking-widest"
+          >
+            <Mail size={16} className="text-primary" />
+            <span>dev.ritoban.goswami@gmail.com</span>
+          </a>
         </div>
         <div className="glass-card p-6 sm:p-12 md:p-16 max-w-2xl mx-auto rounded-none">
           <ContactForm />

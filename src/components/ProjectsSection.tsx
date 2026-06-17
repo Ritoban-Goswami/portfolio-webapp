@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { ArrowRight, ArrowUpRight, X, ImageIcon, AlertTriangle, Lightbulb, ExternalLink, Code2 } from "lucide-react";
 import { projectData } from "@/data/projects";
 
@@ -91,11 +92,10 @@ export default function ProjectsSection() {
               </div>
             </div>
             <p className="font-body-md text-on-background/50 flex-grow mb-14 font-light leading-relaxed text-lg">
-              A collaborative whiteboarding tool built with React and WebSockets. Enables real-time
-              drawing, note-taking, and remote team collaboration with sub-50ms latency sync.
+              A production-grade real-time collaborative Kanban board with multi-board support, drag-and-drop task management, role-based access control, and in-app notifications.
             </p>
             <div className="flex flex-wrap gap-4">
-              {["React", "Node.js", "Socket.io", "Canvas"].map((tag) => (
+              {["Next.js", "TypeScript", "Firebase", "Zustand", "Tailwind CSS"].map((tag) => (
                 <span key={tag} className="px-5 py-2 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/70 uppercase tracking-wider">
                   {tag}
                 </span>
@@ -117,11 +117,60 @@ export default function ProjectsSection() {
               </div>
             </div>
             <p className="font-body-md text-on-background/50 flex-grow mb-14 font-light leading-relaxed text-lg">
-              An open-source library for extracting dominant colors from images using K-Means clustering.
-              Highly optimized for browser environments with Web Workers.
+              An open-source npm library implementing color quantization, dominant color extraction, and luminance-based palette generation for dynamic theming and image compression.
             </p>
             <div className="flex flex-wrap gap-4">
-              {["TypeScript", "Algorithms", "Web Workers"].map((tag) => (
+              {["JavaScript", "Node.js", "Canvas API", "Open Source"].map((tag) => (
+                <span key={tag} className="px-5 py-2 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/70 uppercase tracking-wider">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* PawShots */}
+          <div
+            className="glass-card p-6 sm:p-12 flex flex-col h-full group cursor-pointer"
+            onClick={() => setActiveProject("pawshots")}
+          >
+            <div className="flex justify-between items-start mb-10">
+              <h3 className="font-headline-md text-3xl text-on-background group-hover:text-primary transition-colors font-bold tracking-tight">
+                PawShots
+              </h3>
+              <div className="w-12 h-12 rounded-full border border-on-background/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 transition-all">
+                <ArrowUpRight size={20} className="text-on-background/50 group-hover:text-primary" />
+              </div>
+            </div>
+            <p className="font-body-md text-on-background/50 flex-grow mb-14 font-light leading-relaxed text-lg">
+              A pet image gallery with bulk ZIP download, infinite scroll, real-time search, and AI-powered color analysis grouping pets into 13 visual categories via quantize-colors.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {["React 19", "TypeScript", "Styled Components", "Context API", "Vite"].map((tag) => (
+                <span key={tag} className="px-5 py-2 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/70 uppercase tracking-wider">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Word(le) Finder */}
+          <div
+            className="glass-card p-6 sm:p-12 flex flex-col h-full group cursor-pointer"
+            onClick={() => setActiveProject("wordle")}
+          >
+            <div className="flex justify-between items-start mb-10">
+              <h3 className="font-headline-md text-3xl text-on-background group-hover:text-primary transition-colors font-bold tracking-tight">
+                Word(le) Finder
+              </h3>
+              <div className="w-12 h-12 rounded-full border border-on-background/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 transition-all">
+                <ArrowUpRight size={20} className="text-on-background/50 group-hover:text-primary" />
+              </div>
+            </div>
+            <p className="font-body-md text-on-background/50 flex-grow mb-14 font-light leading-relaxed text-lg">
+              A web tool that helps Wordle players find word suggestions based on green, yellow, and grey letter feedback — with meaning lookup for each result.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {["Next.js", "Shadcn UI", "Tailwind CSS", "Datamuse API"].map((tag) => (
                 <span key={tag} className="px-5 py-2 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/70 uppercase tracking-wider">
                   {tag}
                 </span>
@@ -164,7 +213,17 @@ export default function ProjectsSection() {
                 </div>
                 <div className="p-8 sm:p-16 -mt-20">
                   <div className="w-full h-64 sm:h-96 bg-surface-container-high mb-12 flex items-center justify-center border border-on-background/5 overflow-hidden">
-                    <ImageIcon size={64} className="text-on-background/5" />
+                    {projectData[activeProject].image ? (
+                      <Image
+                        src={projectData[activeProject].image!}
+                        alt={`${projectData[activeProject].title} preview`}
+                        width={896}
+                        height={384}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <ImageIcon size={64} className="text-on-background/5" />
+                    )}
                   </div>
                   <h2
                     id="modal-title"
@@ -205,22 +264,26 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                    <a
-                      href={projectData[activeProject].sourceUrl || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-transparent border border-on-background/20 hover:bg-on-background/5 hover:border-on-background text-on-background px-6 sm:px-8 py-3 sm:py-4 font-label-md text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3"
-                    >
-                      <Code2 size={14} /> View Source
-                    </a>
-                    <a
-                      href={projectData[activeProject].demoUrl || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-primary hover:bg-primary-container text-on-primary px-6 sm:px-8 py-3 sm:py-4 font-label-md text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3"
-                    >
-                      <ExternalLink size={14} /> Live Demo
-                    </a>
+                    {projectData[activeProject].sourceUrl && (
+                      <a
+                        href={projectData[activeProject].sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-transparent border border-on-background/20 hover:bg-on-background/5 hover:border-on-background text-on-background px-6 sm:px-8 py-3 sm:py-4 font-label-md text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3"
+                      >
+                        <Code2 size={14} /> View Source
+                      </a>
+                    )}
+                    {projectData[activeProject].demoUrl && (
+                      <a
+                        href={projectData[activeProject].demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-primary hover:bg-primary-container text-on-primary px-6 sm:px-8 py-3 sm:py-4 font-label-md text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3"
+                      >
+                        <ExternalLink size={14} /> Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </>

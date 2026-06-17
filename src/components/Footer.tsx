@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Code2, Briefcase, Zap } from "lucide-react";
+import { Code2, Briefcase, Zap, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -13,12 +13,29 @@ export default function Footer() {
           height={96}
           style={{ width: "90px", height: "auto" }}
         />
-        <div className="flex gap-10">
-          <a aria-label="GitHub" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="https://github.com/Ritoban-Goswami" target="_blank" rel="noopener noreferrer">
-            <Code2 size={20} />
+        <div className="flex items-center gap-6">
+          <a
+            aria-label="GitHub"
+            className="flex items-center gap-2 text-on-background/60 hover:text-on-background transition-colors duration-300 font-mono-label text-xs uppercase tracking-widest group"
+            href="https://github.com/Ritoban-Goswami"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Code2 size={16} />
+            <span>GitHub</span>
+            <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
-          <a aria-label="LinkedIn" className="text-on-background/40 hover:text-on-background transition-colors duration-300" href="https://www.linkedin.com/in/ritoban-goswami" target="_blank" rel="noopener noreferrer">
-            <Briefcase size={20} />
+          <div className="w-px h-4 bg-on-background/10" />
+          <a
+            aria-label="LinkedIn"
+            className="flex items-center gap-2 text-on-background/60 hover:text-on-background transition-colors duration-300 font-mono-label text-xs uppercase tracking-widest group"
+            href="https://www.linkedin.com/in/ritoban-goswami"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Briefcase size={16} />
+            <span>LinkedIn</span>
+            <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
         </div>
       </div>

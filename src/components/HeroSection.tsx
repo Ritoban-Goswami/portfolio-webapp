@@ -30,8 +30,7 @@ export default function HeroSection() {
             </span>
           </div>
           <p className="font-body-lg text-base sm:text-lg text-on-background/60 max-w-md mt-8 sm:mt-10 font-light leading-relaxed">
-            Building high-performance, scalable web applications with a focus on React, Next.js, and
-            AWS. Bridging the gap between physics logic and software architecture.
+            3+ years shipping production features end-to-end across B2B marketplaces and SaaS platforms — from React/Next.js UI through Node.js/Express.js APIs to AWS serverless infrastructure.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 sm:mt-16 w-full sm:w-auto">
             <a
