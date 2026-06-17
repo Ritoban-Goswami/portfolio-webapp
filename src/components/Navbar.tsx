@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
+
+const RESUME_URL = "https://docs.google.com/document/d/e/2PACX-1vS8C_x9MZ0LMwM09cS7lO9UBzJa9rThBJX0qI_trwRaJ8F7o58_FjjagFpuI_sfy7Mi-7KaXZeYWrig/pub";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -46,12 +48,23 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <a
-          className="hidden md:block pointer-events-auto bg-primary text-on-primary font-label-md text-xs uppercase tracking-widest px-7 py-3 rounded-none hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-95"
-          href="#contact"
-        >
-          Hire Me
-        </a>
+        <div className="hidden md:flex items-center gap-3 pointer-events-auto">
+          <a
+            className="flex items-center gap-2 border border-on-background/20 text-on-background/70 hover:border-on-background hover:text-on-background font-label-md text-xs uppercase tracking-widest px-5 py-3 transition-all duration-300 active:scale-95"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FileText size={13} />
+            Resume
+          </a>
+          <a
+            className="bg-primary text-on-primary font-label-md text-xs uppercase tracking-widest px-7 py-3 rounded-none hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-95"
+            href="#contact"
+          >
+            Hire Me
+          </a>
+        </div>
 
         {/* Mobile menu toggle */}
         <button
@@ -78,6 +91,16 @@ export default function Navbar() {
             {link.label}
           </a>
         ))}
+        <a
+          className="flex items-center gap-2 text-on-background/60 hover:text-on-background font-label-md text-sm uppercase tracking-[0.3em] transition-colors"
+          href={RESUME_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setMobileOpen(false)}
+        >
+          <FileText size={14} />
+          Resume
+        </a>
         <a
           className="mt-4 bg-primary text-on-primary font-label-md text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-95"
           href="#contact"
