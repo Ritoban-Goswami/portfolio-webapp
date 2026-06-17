@@ -33,7 +33,7 @@ export default function Error({
         </div>
         <button
           onClick={reset}
-          className="mt-2 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/60 border border-white/10 rounded hover:bg-white/5 hover:text-white/80 transition-colors"
+          className="mt-2 px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-white/60 border border-white/10 rounded-full hover:bg-white/5 hover:border-white/30 hover:text-white/90 transition-all duration-300"
         >
           Try again
         </button>

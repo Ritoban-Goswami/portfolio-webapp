@@ -4,10 +4,18 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+interface Ripple {
+  id: number;
+  x: number;
+  y: number;
+}
+
 export default function SpotlightCursor() {
   const isMobile = useIsMobile();
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+  const [nextId, setNextId] = useState(0);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -37,9 +45,19 @@ export default function SpotlightCursor() {
     const handleMouseLeave = () => setVisible(false);
     const handleMouseEnter = () => setVisible(true);
 
+    const handleMouseDown = () => {
+      const id = nextId;
+      setNextId((prev) => prev + 1);
+      setRipples((prev) => [...prev, { id, x: mouseX.get(), y: mouseY.get() }]);
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== id));
+      }, 600);
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseover", handleMouseOver, { passive: true });
     window.addEventListener("mouseout", handleMouseOut, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown);
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
@@ -47,10 +65,11 @@ export default function SpotlightCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("mousedown", handleMouseDown);
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, nextId]);
 
   if (isMobile) return null;
 
@@ -75,6 +94,24 @@ export default function SpotlightCursor() {
           transition: "width 0.25s ease, height 0.25s ease, border-color 0.25s ease",
         }}
       />
+
+      {/* Click ripples */}
+      {ripples.map((ripple) => (
+        <motion.div
+          key={ripple.id}
+          className="pointer-events-none fixed rounded-full border border-primary/40"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            translateX: "-50%",
+            translateY: "-50%",
+            zIndex: 9996,
+          }}
+          initial={{ width: 20, height: 20, opacity: 0.8 }}
+          animate={{ width: 60, height: 60, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        />
+      ))}
 
       {/* Inner dot — near-instant, collapses on hover */}
       <motion.div

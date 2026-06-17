@@ -1,49 +1,138 @@
-import FadeUpSection from "@/components/FadeUpSection";
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
   {
-    label: "01 // Languages",
+    index: "01",
+    label: "Languages",
     items: ["TypeScript", "JavaScript", "Python", "SQL"],
   },
   {
-    label: "02 // Frontend",
+    index: "02",
+    label: "Frontend",
     items: ["React", "Next.js", "Tailwind CSS", "Shadcn UI", "Framer Motion", "Radix UI", "WebSockets", "Core Web Vitals"],
   },
   {
-    label: "03 // Backend",
+    index: "03",
+    label: "Backend",
     items: ["Node.js", "Express.js", "REST APIs", "Microservices", "DynamoDB", "MySQL", "Redis"],
   },
   {
-    label: "04 // Infra & Cloud",
+    index: "04",
+    label: "Infra & Cloud",
     items: ["AWS Lambda", "API Gateway", "SQS", "SES", "Docker", "CI/CD", "Terraform", "Git"],
   },
   {
-    label: "05 // Testing",
+    index: "05",
+    label: "Testing",
     items: ["Jest", "Cypress"],
   },
   {
-    label: "06 // Integrations",
+    index: "06",
+    label: "Integrations",
     items: ["Stripe", "OAuth 2.0", "Algolia", "Twilio", "Elastic Email", "Strapi", "Sanity", "OpenAI API"],
   },
 ];
 
+const allSkills = skills.flatMap((s) => s.items);
+
 export default function SkillsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeInnerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(headingRef.current, {
+        opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: headingRef.current, start: "top 88%", once: true },
+      });
+
+      if (marqueeInnerRef.current) {
+        gsap.to(marqueeInnerRef.current, {
+          xPercent: -50,
+          ease: "none",
+          duration: 30,
+          repeat: -1,
+        });
+      }
+
+      const rows = sectionRef.current?.querySelectorAll(".skill-row");
+      rows?.forEach((row, i) => {
+        gsap.fromTo(
+          row,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1, y: 0, duration: 0.55, ease: "power3.out",
+            scrollTrigger: { trigger: row, start: "top 90%", once: true },
+            delay: i * 0.06,
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <FadeUpSection className="py-20 md:py-40 mt-12 md:mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-0" id="skills">
-      <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-32 text-center tracking-tight font-extrabold">
-        Technical <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {skills.map(({ label, items }) => (
-          <div key={label} className="glass-card p-6 sm:p-12">
-            <h3 className="font-headline-md text-xl text-on-background mb-10 flex items-center gap-4 font-semibold tracking-wide">
-              <span className="text-on-background/20 font-mono-label text-sm uppercase">{label}</span>
-            </h3>
-            <div className="flex flex-wrap gap-4">
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="py-20 md:py-40 mt-12 md:mt-24"
+    >
+      {/* Heading */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
+        <h2
+          ref={headingRef}
+          className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-24 text-center tracking-tight font-extrabold"
+        >
+          Technical <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
+        </h2>
+      </div>
+
+      {/* Marquee ticker */}
+      <div
+        ref={marqueeRef}
+        className="overflow-hidden border-y border-on-background/5 py-4 mb-16 md:mb-24"
+      >
+        <div ref={marqueeInnerRef} className="flex gap-8 w-max">
+          {[...allSkills, ...allSkills].map((skill, i) => (
+            <span key={i} className="font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/20 whitespace-nowrap flex items-center gap-8">
+              {skill}
+              <span className="text-primary/30 text-[6px]">◆</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Category rows */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
+        {skills.map(({ index, label, items }) => (
+          <div
+            key={label}
+            className="skill-row grid grid-cols-[auto_1px_1fr] items-start gap-x-8 md:gap-x-12 py-7 border-b border-on-background/5 group last:border-b-0"
+          >
+            {/* Category label */}
+            <div className="w-32 md:w-44 pt-0.5 shrink-0">
+              <span className="font-cormorant italic text-2xl text-on-background/15 font-semibold leading-none block mb-1 select-none">{index}</span>
+              <span className="font-mono-label text-xs uppercase tracking-[0.18em] text-on-background/35 group-hover:text-on-background/60 transition-colors duration-300">{label}</span>
+            </div>
+
+            {/* Divider */}
+            <div className="self-stretch bg-on-background/5 group-hover:bg-primary/30 transition-colors duration-500" />
+
+            {/* Pills */}
+            <div className="flex flex-wrap gap-2.5 pt-1">
               {items.map((item) => (
                 <span
                   key={item}
-                  className="px-5 py-2.5 bg-transparent border border-on-background/10 text-sm font-light text-on-background/70 hover:border-on-background/40 hover:text-on-background transition-all cursor-default"
+                  className="px-3.5 py-1.5 bg-transparent border border-on-background/8 text-xs font-light text-on-background/50 hover:border-on-background/30 hover:text-on-background/80 transition-all duration-200 cursor-default tracking-wide"
                 >
                   {item}
                 </span>
@@ -52,6 +141,6 @@ export default function SkillsSection() {
           </div>
         ))}
       </div>
-    </FadeUpSection>
+    </section>
   );
 }

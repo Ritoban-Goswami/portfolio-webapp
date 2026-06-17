@@ -1,8 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Geist, Cormorant_Garamond } from "next/font/google";
+import { Inter, Geist, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const geist = Geist({
   variable: "--font-geist",
@@ -52,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${cormorant.variable} h-full antialiased dark scroll-smooth`}
+      className={`${inter.variable} ${geist.variable} ${cormorant.variable} h-full antialiased dark scroll-smooth`}
     >
       <body className="min-h-screen bg-background text-on-background font-sans overflow-x-hidden relative" style={{ backgroundColor: "#050505" }}>
         {children}
