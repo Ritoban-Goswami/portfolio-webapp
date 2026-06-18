@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import AboutOrbs from "@/components/AboutOrbs";
-
-gsap.registerPlugin(ScrollTrigger);
+import SectionHeading from "@/components/SectionHeading";
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -46,12 +44,11 @@ export default function AboutSection() {
           </span>
 
           {/* Heading */}
-          <h2 className="about-anim font-headline-lg text-3xl lg:text-5xl text-on-background font-extrabold tracking-tight mb-6 lg:mb-10">
-            From Physics to{" "}
-            <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold">
-              Engineering.
-            </span>
-          </h2>
+          <SectionHeading
+            primary="From Physics to"
+            italic="Engineering."
+            className="about-anim mb-6 lg:mb-10"
+          />
 
           <p className="about-anim font-body-md text-sm lg:text-lg text-on-background/60 mb-5 lg:mb-8 font-light leading-relaxed">
             Self-taught engineer who transitioned from Physics to professional software development, bringing strong analytical rigour to every problem. I own the full delivery cycle — architecture, implementation, data layer, and cloud infra — across B2B marketplaces and SaaS platforms.

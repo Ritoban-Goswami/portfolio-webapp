@@ -3,37 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { ArrowUpRight, X, ImageIcon, ExternalLink, Code2 } from "lucide-react";
-import { projectData } from "@/data/projects";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const _projectOrder = ["boardly", "quantize", "pawshots", "wordle"] as const;
-type ProjectKey = (typeof _projectOrder)[number];
-
-const projectMeta: Record<ProjectKey, { index: string; shortDesc: string; tags: string[] }> = {
-  boardly: {
-    index: "01",
-    shortDesc: "Real-time collaborative Kanban board with RBAC, drag-and-drop, and in-app notifications.",
-    tags: ["Next.js", "TypeScript", "Firebase", "Zustand", "Tailwind CSS"],
-  },
-  quantize: {
-    index: "02",
-    shortDesc: "Open-source npm library for color quantization, dominant extraction, and luminance palettes.",
-    tags: ["JavaScript", "Node.js", "Canvas API", "Open Source"],
-  },
-  pawshots: {
-    index: "03",
-    shortDesc: "Pet gallery with bulk ZIP download, infinite scroll, and AI-powered color grouping.",
-    tags: ["React 19", "TypeScript", "Styled Components", "Context API", "Vite"],
-  },
-  wordle: {
-    index: "04",
-    shortDesc: "Wordle helper that filters suggestions from positional constraints with meaning lookup.",
-    tags: ["Next.js", "Shadcn UI", "Tailwind CSS", "Datamuse API"],
-  },
-};
+import { projectData, projectOrder, type ProjectKey } from "@/data/projects";
+import { gsap } from "@/lib/gsap";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
+import SectionHeading from "@/components/SectionHeading";
 
 export default function ProjectsSection() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
@@ -53,15 +26,14 @@ export default function ProjectsSection() {
     drawerTlRef.current.reverse();
     drawerTlRef.current.eventCallback("onReverseComplete", () => {
       setActiveProject(null);
-      document.body.style.overflow = "auto";
       previousFocusRef.current?.focus();
     });
   }, []);
 
+  useBodyScrollLock(!!activeProject);
+
   useEffect(() => {
     if (!activeProject || !drawerRef.current || !overlayRef.current) return;
-
-    document.body.style.overflow = "hidden";
 
     const isMobile = window.innerWidth < 640;
     const tl = gsap.timeline();
@@ -135,8 +107,7 @@ export default function ProjectsSection() {
   }, []);
 
   const featured = projectData["boardly"];
-  const featuredMeta = projectMeta["boardly"];
-  const rest = (["quantize", "pawshots", "wordle"] as ProjectKey[]);
+  const rest = projectOrder.slice(1) as ProjectKey[];
 
   return (
     <>
@@ -147,9 +118,7 @@ export default function ProjectsSection() {
       >
         {/* Heading row */}
         <div className="mb-8 lg:mb-20">
-          <h2 className="font-headline-lg text-3xl lg:text-5xl text-on-background tracking-tight font-extrabold">
-            Featured <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Projects</span>
-          </h2>
+          <SectionHeading primary="Featured" italic="Projects" />
         </div>
 
         {/* Hero card — Boardly */}
@@ -161,7 +130,7 @@ export default function ProjectsSection() {
           <div className="flex flex-col justify-between p-6 sm:p-12 lg:w-[48%] shrink-0">
             <div>
               <span className="font-cormorant italic text-[2.5rem] lg:text-[3.5rem] leading-none text-on-background/8 font-semibold select-none">
-                {featuredMeta.index}
+                {featured.index}
               </span>
               <h3 className="font-headline-lg text-2xl lg:text-5xl text-on-background group-hover:text-primary transition-colors duration-300 font-extrabold tracking-tight mt-2 mb-4 lg:mb-6">
                 {featured.title}
@@ -172,7 +141,7 @@ export default function ProjectsSection() {
             </div>
             <div className="mt-6 lg:mt-10">
               <div className="flex flex-wrap gap-3 mb-8">
-                {featuredMeta.tags.map((tag) => (
+                {featured.tags.map((tag) => (
                   <span key={tag} className="px-4 py-1.5 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/60 uppercase tracking-wider">
                     {tag}
                   </span>
@@ -207,7 +176,6 @@ export default function ProjectsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {rest.map((key) => {
             const proj = projectData[key];
-            const meta = projectMeta[key];
             return (
               <div
                 key={key}
@@ -216,7 +184,7 @@ export default function ProjectsSection() {
               >
                 <div className="flex justify-between items-start mb-6">
                   <span className="font-cormorant italic text-4xl leading-none text-on-background/8 font-semibold select-none">
-                    {meta.index}
+                    {proj.index}
                   </span>
                   <div className="w-9 h-9 rounded-full border border-on-background/10 flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300 shrink-0">
                     <ArrowUpRight size={15} className="text-on-background/40 group-hover:text-primary transition-colors duration-300" />
@@ -226,10 +194,10 @@ export default function ProjectsSection() {
                   {proj.title}
                 </h3>
                 <p className="font-body-md text-on-background/40 font-light leading-relaxed text-sm flex-grow mb-6">
-                  {meta.shortDesc}
+                  {proj.shortDesc}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-auto">
-                  {meta.tags.slice(0, 3).map((tag) => (
+                  {proj.tags.slice(0, 3).map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-on-background/5 border border-on-background/8 text-[10px] font-mono-label text-on-background/50 uppercase tracking-wider">
                       {tag}
                     </span>
@@ -291,7 +259,7 @@ export default function ProjectsSection() {
               </button>
               {/* Index pinned to banner bottom-left */}
               <span className="absolute bottom-3 left-5 sm:left-8 font-cormorant italic text-4xl sm:text-6xl leading-none text-on-background/15 font-semibold select-none">
-                {projectMeta[activeProject as ProjectKey]?.index}
+                {projectData[activeProject].index}
               </span>
             </div>
 

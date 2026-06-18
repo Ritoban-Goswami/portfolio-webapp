@@ -15,7 +15,6 @@ export default function SpotlightCursor() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [ripples, setRipples] = useState<Ripple[]>([]);
-  const [nextId, setNextId] = useState(0);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -46,9 +45,11 @@ export default function SpotlightCursor() {
     const handleMouseEnter = () => setVisible(true);
 
     const handleMouseDown = () => {
-      const id = nextId;
-      setNextId((prev) => prev + 1);
-      setRipples((prev) => [...prev, { id, x: mouseX.get(), y: mouseY.get() }]);
+      const id = Date.now();
+      const newRipple = { id, x: mouseX.get(), y: mouseY.get() };
+      setRipples((prev) => [...prev, newRipple]);
+
+      // Auto-remove ripple after animation
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== id));
       }, 600);
@@ -69,7 +70,7 @@ export default function SpotlightCursor() {
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, nextId]);
+  }, [mouseX, mouseY]);
 
   if (isMobile) return null;
 
@@ -89,7 +90,7 @@ export default function SpotlightCursor() {
           width: hovering ? 52 : 32,
           height: hovering ? 52 : 32,
           border: hovering
-            ? "1px solid rgba(255,31,31,0.5)"
+            ? "1px solid color-mix(in srgb, var(--color-primary) 50%, transparent)"
             : "1px solid rgba(255,255,255,0.12)",
           transition: "width 0.25s ease, height 0.25s ease, border-color 0.25s ease",
         }}
@@ -125,9 +126,9 @@ export default function SpotlightCursor() {
           willChange: "transform",
           width: hovering ? 3 : 4,
           height: hovering ? 3 : 4,
-          background: hovering ? "rgba(255,31,31,0.9)" : "rgba(255,255,255,0.9)",
+          background: hovering ? "color-mix(in srgb, var(--color-primary) 90%, transparent)" : "rgba(255,255,255,0.9)",
           boxShadow: hovering
-            ? "0 0 6px 2px rgba(255,31,31,0.4)"
+            ? "0 0 6px 2px color-mix(in srgb, var(--color-primary) 40%, transparent)"
             : "0 0 4px 1px rgba(255,255,255,0.2)",
           transition: "width 0.2s ease, height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease",
         }}

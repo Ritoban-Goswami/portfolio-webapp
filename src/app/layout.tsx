@@ -59,7 +59,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${geist.variable} ${cormorant.variable} h-full antialiased dark scroll-smooth`}
     >
-      <body className="min-h-screen bg-background text-on-background font-sans overflow-x-hidden relative" style={{ backgroundColor: "#050505" }}>
+      <body className="min-h-screen bg-background text-on-background font-sans overflow-x-hidden relative">
         {children}
         <Analytics />
         <SpeedInsights />

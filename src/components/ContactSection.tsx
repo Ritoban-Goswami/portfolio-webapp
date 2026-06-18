@@ -3,10 +3,8 @@
 import { useEffect, useRef } from "react";
 import ContactForm from "@/components/ContactForm";
 import { Mail } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
+import SectionHeading from "@/components/SectionHeading";
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -48,10 +46,11 @@ export default function ContactSection() {
           <span className="font-mono-label text-[10px] sm:text-xs uppercase tracking-[0.2em] text-on-background/40 mb-4 sm:mb-6 block">
             Get in touch
           </span>
-          <h2 className="font-headline-lg text-3xl lg:text-5xl text-on-background mb-4 sm:mb-6 lg:mb-8 font-extrabold tracking-tight">
-            Let&apos;s Build <br className="hidden sm:block" />
-            <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Something Great.</span>
-          </h2>
+          <SectionHeading
+            primary={<>Let&apos;s Build <br className="hidden sm:block" /></>}
+            italic="Something Great."
+            className="mb-4 sm:mb-6 lg:mb-8"
+          />
           <p className="font-body-lg text-on-background/50 font-light text-sm sm:text-base lg:text-lg leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-md">
             Currently open to new opportunities — freelance, full-time, or consulting. I&apos;ll get back to you within 24 hours.
           </p>
