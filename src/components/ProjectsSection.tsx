@@ -63,12 +63,13 @@ export default function ProjectsSection() {
 
     document.body.style.overflow = "hidden";
 
+    const isMobile = window.innerWidth < 640;
     const tl = gsap.timeline();
     tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" })
       .fromTo(
         drawerRef.current,
-        { x: "100%" },
-        { x: "0%", duration: 0.55, ease: "power4.out" },
+        isMobile ? { y: "100%" } : { x: "100%" },
+        isMobile ? { y: "0%", duration: 0.45, ease: "power4.out" } : { x: "0%", duration: 0.55, ease: "power4.out" },
         "-=0.2"
       );
 
@@ -141,13 +142,13 @@ export default function ProjectsSection() {
     <>
       <section
         ref={sectionRef}
-        className="py-20 md:py-40 mt-12 md:mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-0"
+        className="py-12 lg:py-40 mt-12 lg:mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-0"
         id="projects"
       >
         {/* Heading row */}
-        <div className="mb-12 md:mb-20">
-          <h2 className="font-headline-lg text-4xl md:text-5xl text-on-background tracking-tight font-extrabold">
-            Featured <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Projects</span>
+        <div className="mb-8 lg:mb-20">
+          <h2 className="font-headline-lg text-3xl lg:text-5xl text-on-background tracking-tight font-extrabold">
+            Featured <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Projects</span>
           </h2>
         </div>
 
@@ -157,19 +158,19 @@ export default function ProjectsSection() {
           onClick={() => openDrawer("boardly")}
         >
           {/* Text side */}
-          <div className="flex flex-col justify-between p-8 sm:p-12 lg:w-[48%] shrink-0">
+          <div className="flex flex-col justify-between p-6 sm:p-12 lg:w-[48%] shrink-0">
             <div>
-              <span className="font-cormorant italic text-[3.5rem] leading-none text-on-background/8 font-semibold select-none">
+              <span className="font-cormorant italic text-[2.5rem] lg:text-[3.5rem] leading-none text-on-background/8 font-semibold select-none">
                 {featuredMeta.index}
               </span>
-              <h3 className="font-headline-lg text-4xl md:text-5xl text-on-background group-hover:text-primary transition-colors duration-300 font-extrabold tracking-tight mt-2 mb-6">
+              <h3 className="font-headline-lg text-2xl lg:text-5xl text-on-background group-hover:text-primary transition-colors duration-300 font-extrabold tracking-tight mt-2 mb-4 lg:mb-6">
                 {featured.title}
               </h3>
-              <p className="font-body-lg text-on-background/50 font-light leading-relaxed text-lg">
+              <p className="font-body-lg text-on-background/50 font-light leading-relaxed text-sm lg:text-lg">
                 {featured.description}
               </p>
             </div>
-            <div className="mt-10">
+            <div className="mt-6 lg:mt-10">
               <div className="flex flex-wrap gap-3 mb-8">
                 {featuredMeta.tags.map((tag) => (
                   <span key={tag} className="px-4 py-1.5 bg-on-background/5 border border-on-background/10 text-xs font-mono-label text-on-background/60 uppercase tracking-wider">
@@ -214,7 +215,7 @@ export default function ProjectsSection() {
                 onClick={() => openDrawer(key)}
               >
                 <div className="flex justify-between items-start mb-6">
-                  <span className="font-cormorant italic text-5xl leading-none text-on-background/8 font-semibold select-none">
+                  <span className="font-cormorant italic text-4xl leading-none text-on-background/8 font-semibold select-none">
                     {meta.index}
                   </span>
                   <div className="w-9 h-9 rounded-full border border-on-background/10 flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300 shrink-0">
@@ -257,14 +258,14 @@ export default function ProjectsSection() {
             style={{ opacity: 0 }}
           />
 
-          {/* Drawer panel — single column: image banner top, content scrolls below */}
+          {/* Drawer panel — bottom sheet on mobile, side drawer on sm+ */}
           <div
             ref={drawerRef}
-            className="absolute top-0 right-0 h-full w-full sm:w-[85vw] lg:w-[60vw] xl:w-[52vw] bg-surface-container-low border-l border-on-background/10 flex flex-col overflow-y-auto overscroll-contain shadow-2xl"
-            style={{ transform: "translateX(100%)" }}
+            className="absolute bottom-0 inset-x-0 max-h-[90svh] sm:max-h-none sm:top-0 sm:bottom-auto sm:right-0 sm:left-auto sm:h-full w-full sm:w-[85vw] lg:w-[60vw] xl:w-[52vw] bg-surface-container-low sm:border-l border-t sm:border-t-0 border-on-background/10 flex flex-col overflow-y-auto overscroll-contain shadow-2xl rounded-t-2xl sm:rounded-none"
+            style={{ transform: typeof window !== "undefined" && window.innerWidth < 640 ? "translateY(100%)" : "translateX(100%)" }}
           >
-            {/* Image banner — full width, fixed height */}
-            <div className="relative w-full h-96 sm:h-[480px] bg-surface-container-high overflow-hidden">
+            {/* Image banner — h-40 on mobile, h-[480px] on sm+ */}
+            <div className="relative w-full h-40 sm:h-[480px] bg-surface-container-high overflow-hidden shrink-0">
               {projectData[activeProject].image ? (
                 <Image
                   src={projectData[activeProject].image!}
@@ -278,30 +279,32 @@ export default function ProjectsSection() {
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent" />
-              {/* Close button pinned to banner top-right */}
+              {/* Handle bar — mobile only */}
+              <div className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-on-background/30 rounded-full" />
+              {/* Close button */}
               <button
-                className="absolute top-4 right-4 w-10 h-10 rounded-full text-on-background/60 hover:text-on-background bg-surface-container-high/70 backdrop-blur-sm border border-on-background/10 hover:border-on-background/30 hover:bg-on-background/5 transition-all duration-300 z-10 flex items-center justify-center"
+                className="sm:hidden absolute top-3 right-3 w-9 h-9 rounded-full text-on-background/60 hover:text-on-background bg-surface-container-high/70 backdrop-blur-sm border border-on-background/10 hover:border-on-background/30 hover:bg-on-background/5 transition-all duration-300 z-10 flex items-center justify-center"
                 onClick={closeDrawer}
                 aria-label="Close"
               >
-                <X size={16} />
+                <X size={15} />
               </button>
               {/* Index pinned to banner bottom-left */}
-              <span className="absolute bottom-3 left-8 font-cormorant italic text-6xl leading-none text-on-background/15 font-semibold select-none">
+              <span className="absolute bottom-3 left-5 sm:left-8 font-cormorant italic text-4xl sm:text-6xl leading-none text-on-background/15 font-semibold select-none">
                 {projectMeta[activeProject as ProjectKey]?.index}
               </span>
             </div>
 
             {/* Content */}
-            <div className="px-8 sm:px-10 pt-8 pb-12">
+            <div className="px-5 sm:px-10 pt-4 sm:pt-8 pb-10">
               {/* Title + tags */}
               <h2
                 id="drawer-title"
-                className="font-headline-lg text-3xl sm:text-4xl text-on-background font-extrabold tracking-tight mb-5"
+                className="font-headline-lg text-2xl sm:text-4xl text-on-background font-extrabold tracking-tight mb-3 sm:mb-5"
               >
                 {projectData[activeProject].title}
               </h2>
-              <div className="flex flex-wrap gap-2 mb-10 pb-10 border-b border-on-background/5">
+              <div className="flex flex-wrap gap-2 mb-5 sm:mb-10 pb-5 sm:pb-10 border-b border-on-background/5">
                 {projectData[activeProject].tags.map((tag) => (
                   <span key={tag} className="px-4 py-1.5 bg-on-background/5 border border-on-background/10 text-[10px] font-mono-label text-on-background/60 uppercase tracking-wider">
                     {tag}
@@ -310,12 +313,12 @@ export default function ProjectsSection() {
               </div>
 
               {/* Description */}
-              <p className="font-body-lg text-on-background/60 leading-relaxed text-base font-light mb-6">
+              <p className="font-body-lg text-on-background/60 leading-relaxed text-sm sm:text-base font-light mb-4 sm:mb-6">
                 {projectData[activeProject].description}
               </p>
 
               {/* Challenge */}
-              <div className="mb-6 pb-6 border-b border-on-background/5">
+              <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-on-background/5">
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-cormorant italic text-3xl text-primary/30 font-semibold leading-none select-none">01</span>
                   <h3 className="font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/40">Challenge</h3>
@@ -326,7 +329,7 @@ export default function ProjectsSection() {
               </div>
 
               {/* Solution */}
-              <div className="mb-8">
+              <div className="mb-5 sm:mb-8">
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-cormorant italic text-3xl text-primary/30 font-semibold leading-none select-none">02</span>
                   <h3 className="font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/40">Solution</h3>
@@ -343,7 +346,7 @@ export default function ProjectsSection() {
                     href={projectData[activeProject].sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-transparent border border-on-background/20 hover:bg-on-background/5 hover:border-on-background/40 text-on-background px-6 py-3.5 rounded-full font-mono-label text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 group"
+                    className="flex-1 bg-transparent border border-on-background/20 hover:bg-on-background/5 hover:border-on-background/40 text-on-background px-5 py-2.5 rounded-full font-mono-label text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 group"
                   >
                     <Code2 size={13} /> View Source
                   </a>
@@ -353,7 +356,7 @@ export default function ProjectsSection() {
                     href={projectData[activeProject].demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-primary hover:bg-primary-container text-on-primary px-6 py-3.5 rounded-full font-mono-label text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 group"
+                    className="flex-1 bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-full font-mono-label text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 group"
                   >
                     <ExternalLink size={13} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /> Live Demo
                   </a>

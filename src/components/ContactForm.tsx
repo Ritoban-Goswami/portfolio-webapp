@@ -59,7 +59,7 @@ export default function ContactForm() {
         </div>
         <p className="text-on-background/40 font-body-md font-light text-sm">I&apos;ll get back to you within 24 hours.</p>
         <button
-          className="mt-2 px-4 py-2 text-on-background/50 hover:text-on-background hover:bg-on-background/5 border border-on-background/10 hover:border-on-background/30 font-mono-label text-xs uppercase tracking-widest transition-all duration-300 w-fit rounded-full"
+          className="mt-2 px-3.5 py-1.5 text-on-background/50 hover:text-on-background hover:bg-on-background/5 border border-on-background/10 hover:border-on-background/30 font-mono-label text-xs uppercase tracking-widest transition-all duration-300 w-fit rounded-full"
           onClick={() => setStatus("idle")}
         >
           Send another →
@@ -69,8 +69,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={handleFormSubmit}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <form className="flex flex-col gap-8 sm:gap-10" onSubmit={handleFormSubmit}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6">
         <input
           className="w-full input-line font-body-md"
           placeholder="Your Name"
@@ -91,8 +91,8 @@ export default function ContactForm() {
 
       {/* Inquiry type chips */}
       <div>
-        <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-on-background/30 mb-3">Inquiry Type</p>
-        <div className="flex flex-wrap gap-2">
+        <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-on-background/40 mb-4">Inquiry Type</p>
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
           {inquiryTypes.map(({ value, label }) => (
             <button
               key={value}
@@ -100,7 +100,7 @@ export default function ContactForm() {
               onClick={() => setFormData({ ...formData, type: value })}
               className={`px-4 py-2 text-xs font-mono-label uppercase tracking-wider rounded-full border transition-all duration-300 ${formData.type === value
                 ? "border-primary bg-primary/10 text-primary"
-                : "border-on-background/10 text-on-background/40 hover:border-on-background/30 hover:text-on-background/70 hover:bg-on-background/5"
+                : "border-on-background/15 text-on-background/50 hover:border-on-background/30 hover:text-on-background/80 hover:bg-on-background/5"
                 }`}
             >
               {label}
@@ -112,7 +112,7 @@ export default function ContactForm() {
       </div>
 
       <textarea
-        className="w-full input-line font-body-md min-h-[130px] resize-none"
+        className="w-full input-line font-body-md min-h-[120px] sm:min-h-[140px] resize-none"
         placeholder="Tell me about your project..."
         required
         value={formData.message}
@@ -127,7 +127,7 @@ export default function ContactForm() {
       )}
 
       <button
-        className="w-full bg-primary text-on-primary font-mono-label text-xs uppercase tracking-[0.2em] py-3.5 rounded-full hover:bg-primary-container transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed mt-2 group"
+        className="w-full bg-primary text-on-primary font-mono-label text-xs uppercase tracking-[0.2em] py-3.5 sm:py-3 rounded-full hover:bg-primary-container transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed mt-2 sm:mt-0 group"
         type="submit"
         disabled={status === "loading"}
       >

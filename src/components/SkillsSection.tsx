@@ -84,28 +84,28 @@ export default function SkillsSection() {
     <section
       ref={sectionRef}
       id="skills"
-      className="py-20 md:py-40 mt-12 md:mt-24"
+      className="py-12 lg:py-40 mt-12 lg:mt-24"
     >
       {/* Heading */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
         <h2
           ref={headingRef}
-          className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-24 text-center tracking-tight font-extrabold"
+          className="font-headline-lg text-3xl lg:text-5xl text-on-background mb-10 lg:mb-24 text-center tracking-tight font-extrabold"
         >
-          Technical <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
+          Technical <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
         </h2>
       </div>
 
       {/* Marquee ticker */}
       <div
         ref={marqueeRef}
-        className="overflow-hidden border-y border-on-background/5 py-4 mb-16 md:mb-24"
+        className="overflow-hidden border-y border-on-background/10 py-4 mb-10 lg:mb-24"
       >
         <div ref={marqueeInnerRef} className="flex gap-8 w-max">
           {[...allSkills, ...allSkills].map((skill, i) => (
-            <span key={i} className="font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/20 whitespace-nowrap flex items-center gap-8">
+            <span key={i} className="font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/35 whitespace-nowrap flex items-center gap-8">
               {skill}
-              <span className="text-primary/30 text-[6px]">◆</span>
+              <span className="text-primary/50 text-[6px]">◆</span>
             </span>
           ))}
         </div>
@@ -116,23 +116,23 @@ export default function SkillsSection() {
         {skills.map(({ index, label, items }) => (
           <div
             key={label}
-            className="skill-row grid grid-cols-[auto_1px_1fr] items-start gap-x-8 md:gap-x-12 py-7 border-b border-on-background/5 group last:border-b-0"
+            className="skill-row flex flex-col lg:grid lg:grid-cols-[auto_1px_1fr] items-start gap-x-5 lg:gap-x-12 py-5 lg:py-7 border-b border-on-background/10 group last:border-b-0 gap-y-3 lg:gap-y-0"
           >
             {/* Category label */}
-            <div className="w-32 md:w-44 pt-0.5 shrink-0">
-              <span className="font-cormorant italic text-2xl text-on-background/15 font-semibold leading-none block mb-1 select-none">{index}</span>
-              <span className="font-mono-label text-xs uppercase tracking-[0.18em] text-on-background/35 group-hover:text-on-background/60 transition-colors duration-300">{label}</span>
+            <div className="w-full lg:w-44 pt-0.5 shrink-0 flex items-center gap-3 lg:block">
+              <span className="font-cormorant italic text-2xl text-primary/40 group-hover:text-primary/70 font-semibold leading-none lg:block lg:mb-1 select-none transition-colors duration-300">{index}</span>
+              <span className="font-mono-label text-xs uppercase tracking-[0.18em] text-on-background/50 group-hover:text-on-background/75 transition-colors duration-300">{label}</span>
             </div>
 
             {/* Divider */}
-            <div className="self-stretch bg-on-background/5 group-hover:bg-primary/30 transition-colors duration-500" />
+            <div className="hidden lg:block self-stretch bg-on-background/10 group-hover:bg-primary/40 transition-colors duration-500" />
 
             {/* Pills */}
             <div className="flex flex-wrap gap-2.5 pt-1">
               {items.map((item) => (
                 <span
                   key={item}
-                  className="px-3.5 py-1.5 bg-transparent border border-on-background/8 text-xs font-light text-on-background/50 hover:border-on-background/30 hover:text-on-background/80 transition-all duration-200 cursor-default tracking-wide"
+                  className="px-3.5 py-1.5 bg-on-background/[0.04] border border-on-background/15 text-xs font-light text-on-background/65 hover:border-primary/40 hover:text-on-background/90 hover:bg-primary/5 transition-all duration-200 cursor-default tracking-wide"
                 >
                   {item}
                 </span>

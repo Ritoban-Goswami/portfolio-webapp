@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Menu, X, FileText } from "lucide-react";
-import gsap from "gsap";
+import { FileText, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const RESUME_URL = "https://docs.google.com/document/d/e/2PACX-1vS8C_x9MZ0LMwM09cS7lO9UBzJa9rThBJX0qI_trwRaJ8F7o58_FjjagFpuI_sfy7Mi-7KaXZeYWrig/pub";
 
@@ -15,115 +15,88 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileTlRef = useRef<gsap.core.Timeline | null>(null);
 
-  // Entrance animation
   useEffect(() => {
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, y: -20 },
-      { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", delay: 0.3 }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          setActiveSection(id === "hero" ? "" : id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
     );
-  }, []);
 
-  // Scroll-aware backdrop
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const hero = document.getElementById("hero");
+    if (hero) observer.observe(hero);
 
-  // Active section via IntersectionObserver
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    // Observe hero — clears active state when back at top
-    const heroEl = document.getElementById("hero");
-    if (heroEl) {
-      const heroObs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(""); },
-        { rootMargin: "0px 0px -50% 0px", threshold: 0 }
-      );
-      heroObs.observe(heroEl);
-      observers.push(heroObs);
-    }
-
-    // Observe each nav section
     navLinks.forEach(({ id }) => {
       const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
+      if (el) observer.observe(el);
     });
 
-    // Clear when scrolled past all sections into footer/contact
-    const lastSection = document.getElementById("skills");
     const onScroll = () => {
-      if (!lastSection) return;
-      const bottom = lastSection.getBoundingClientRect().bottom;
-      if (bottom < 0) setActiveSection("");
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
+      const y = window.scrollY;
+      setScrolled(y > 80);
 
+      const skills = document.getElementById("skills");
+      if (skills && skills.getBoundingClientRect().bottom < 0) {
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      observers.forEach((o) => o.disconnect());
+      observer.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
-  // Mobile menu GSAP open/close
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (!mobileMenuRef.current) return;
-    if (mobileOpen) {
+    if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
-      const tl = gsap.timeline();
-      tl.fromTo(
-        mobileMenuRef.current,
-        { opacity: 0, y: -12, pointerEvents: "none" },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power3.out", pointerEvents: "auto" }
-      );
-      const links = mobileMenuRef.current.querySelectorAll(".mobile-link");
-      tl.fromTo(links, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.25, stagger: 0.06, ease: "power2.out" }, "-=0.1");
-      mobileTlRef.current = tl;
     } else {
-      document.body.style.overflow = "auto";
-      if (mobileTlRef.current) {
-        gsap.to(mobileMenuRef.current, { opacity: 0, y: -8, duration: 0.2, ease: "power2.in", pointerEvents: "none" });
-      }
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = "auto"; };
-  }, [mobileOpen]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
 
   return (
-    <header ref={headerRef} className="fixed top-0 w-full z-40 pointer-events-none" style={{ opacity: 0 }}>
-      <div className="relative flex items-center justify-center max-w-[1400px] mx-auto px-6 md:px-12 h-24 pointer-events-none">
+    <motion.header
+      ref={headerRef}
+      className="fixed top-0 w-full z-40 pointer-events-none"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.2, 0, 0.2, 1], delay: 0.3 }}
+    >
+      <div className="relative flex items-center justify-between max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-20 sm:h-24 pointer-events-none">
 
         {/* Logo */}
-        <a href="#" aria-label="Go to top of page" className="absolute left-6 md:left-12 pointer-events-auto">
+        <a href="#" aria-label="Go to top of page" className="pointer-events-auto">
           <Image
             alt="Ritoban Goswami Logo"
             className="rounded-md opacity-80 hover:opacity-100 transition-opacity duration-300 mt-4"
             src="/logo.webp"
             width={176}
             height={96}
-            style={{ width: "80px", height: "auto" }}
+            style={{ width: "60px", height: "auto" }}
             priority
             loading="eager"
           />
         </a>
 
-        {/* Navigation - centered pill */}
+        {/* Desktop Navigation - centered pill */}
         <nav
-          className={`hidden md:flex items-center gap-1 pointer-events-auto backdrop-blur-xl border rounded-full px-2 py-2 transition-all duration-300 ${scrolled
+          className={`hidden md:flex items-center gap-1 pointer-events-auto backdrop-blur-xl border rounded-full px-0.5 py-0.5 transition-all duration-300 ${scrolled
             ? "bg-on-background/[0.07] border-on-background/[0.12]"
             : "bg-on-background/[0.04] border-on-background/[0.07]"
             }`}
@@ -134,7 +107,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`font-label-md text-xs uppercase tracking-widest px-5 py-2 rounded-full transition-all duration-200 ${isActive
+                className={`font-label-md text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-200 ${isActive
                   ? "text-primary"
                   : "text-on-background/50 hover:text-on-background hover:bg-on-background/[0.06]"
                   }`}
@@ -145,71 +118,120 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Action buttons */}
-        <div className="hidden md:flex items-center gap-3 absolute right-6 md:right-12 pointer-events-auto">
+        {/* Desktop Action buttons + Mobile Menu Toggle */}
+        <div className="flex items-center gap-3 pointer-events-auto">
           <a
-            className="flex items-center gap-2 border border-on-background/20 text-on-background/70 hover:border-on-background/50 hover:text-on-background hover:bg-on-background/5 font-label-md text-xs uppercase tracking-widest px-5 py-3 rounded-full transition-all duration-300 active:scale-95"
+            className="hidden sm:flex items-center gap-2 border border-on-background/20 text-on-background/70 hover:border-on-background/50 hover:text-on-background hover:bg-on-background/5 font-label-md text-xs uppercase tracking-widest px-4 py-2 rounded-full transition-all duration-300 active:scale-95"
             href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FileText size={13} />
-            Resume
+            <span className="hidden lg:inline">Resume</span>
+            <span className="lg:hidden">CV</span>
           </a>
           <a
-            className="bg-primary text-on-primary font-label-md text-xs uppercase tracking-widest px-7 py-3 rounded-full hover:bg-primary-container transition-all duration-300 active:scale-95"
+            className="hidden sm:inline-flex bg-primary text-on-primary font-label-md text-xs uppercase tracking-widest px-5 py-2 rounded-full hover:bg-primary-container transition-all duration-300 active:scale-95"
             href="#contact"
           >
             Hire Me
           </a>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-full text-on-background/70 hover:text-on-background hover:bg-on-background/10 transition-all"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden absolute right-6 pointer-events-auto w-10 h-10 rounded-full border border-on-background/10 bg-surface-container-high/50 backdrop-blur-sm text-on-background/70 hover:text-on-background hover:border-on-background/30 hover:bg-on-background/5 transition-all duration-300 flex items-center justify-center"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-
       </div>
 
-      {/* Mobile menu */}
-      <div
-        ref={mobileMenuRef}
-        className="md:hidden fixed inset-0 top-24 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
-        style={{ opacity: 0, pointerEvents: "none" }}
-      >
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            className={`mobile-link font-label-md text-sm uppercase tracking-[0.3em] transition-colors ${activeSection === link.id ? "text-on-background" : "text-on-background/60 hover:text-on-background"
-              }`}
-            href={link.href}
-            onClick={() => setMobileOpen(false)}
-          >
-            {link.label}
-          </a>
-        ))}
-        <a
-          className="mobile-link flex items-center gap-2 text-on-background/60 hover:text-on-background font-label-md text-sm uppercase tracking-[0.3em] transition-colors"
-          href={RESUME_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setMobileOpen(false)}
-        >
-          <FileText size={14} />
-          Resume
-        </a>
-        <a
-          className="mobile-link mt-4 bg-primary text-on-primary font-label-md text-sm uppercase tracking-widest px-8 py-4 rounded-full hover:bg-primary-container transition-all duration-300 active:scale-95"
-          href="#contact"
-          onClick={() => setMobileOpen(false)}
-        >
-          Hire Me
-        </a>
-      </div>
-    </header>
+      {/* Mobile Menu - Bottom Sheet */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-30 pointer-events-auto"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            {/* Sheet */}
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="md:hidden fixed bottom-0 inset-x-0 z-40 pointer-events-auto"
+            >
+              <div className="mx-4 mb-6 p-2 bg-surface-container/95 backdrop-blur-xl border border-on-background/10 rounded-2xl shadow-2xl">
+                {/* Handle bar */}
+                <div className="flex justify-center pt-2 pb-4">
+                  <div className="w-10 h-1 bg-on-background/20 rounded-full" />
+                </div>
+
+                <nav className="flex flex-col gap-1 pb-2">
+                  {navLinks.map((link, index) => {
+                    const isActive = activeSection === link.id;
+                    return (
+                      <motion.a
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        transition={{
+                          duration: 0.2,
+                          delay: index * 0.05,
+                        }}
+                        className={`flex items-center justify-center font-label-md text-sm uppercase tracking-widest py-3 px-4 rounded-xl transition-all duration-200 ${isActive
+                          ? "text-primary bg-primary/10"
+                          : "text-on-background/70 hover:text-on-background hover:bg-on-background/5"
+                          }`}
+                      >
+                        {link.label}
+                      </motion.a>
+                    );
+                  })}
+                </nav>
+
+                {/* Divider */}
+                <div className="h-px bg-on-background/10 mx-2 my-2" />
+
+                {/* CTAs */}
+                <div className="flex gap-2 p-2">
+                  <a
+                    className="flex-1 flex items-center justify-center gap-2 border border-on-background/20 text-on-background/70 hover:border-on-background/40 hover:text-on-background font-label-md text-xs uppercase tracking-widest py-3 rounded-xl transition-all"
+                    href={RESUME_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <FileText size={14} />
+                    Resume
+                  </a>
+                  <a
+                    className="flex-1 flex items-center justify-center bg-primary text-on-primary font-label-md text-xs uppercase tracking-widest py-3 rounded-xl hover:bg-primary-container transition-all"
+                    href="#contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Hire Me
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+    </motion.header>
   );
 }

@@ -73,11 +73,11 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
 
   return (
     <div
-      className={`exp-entry relative flex flex-col md:flex-row items-center justify-between w-full group ${index < experiences.length - 1 ? "mb-20 md:mb-40" : ""}`}
+      className={`exp-entry relative flex flex-col lg:flex-row items-center justify-between w-full group ${index < experiences.length - 1 ? "mb-10 lg:mb-40" : ""}`}
     >
       {/* Date — desktop left or right */}
       {!isLeft && (
-        <div className="exp-date hidden md:block w-[45%] text-right pr-16">
+        <div className="exp-date hidden lg:block w-[45%] text-right pr-16">
           <span className="font-mono-label text-on-background/40 uppercase tracking-[0.2em] text-sm group-hover:text-on-background transition-colors duration-300">
             {entry.date}
           </span>
@@ -87,23 +87,23 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
       <div data-align={entry.align} className="exp-dot timeline-dot transition-all duration-300 group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(255,31,31,0.5)]" />
 
       {/* Card side */}
-      <div className={`exp-card w-full pl-12 md:pl-0 md:w-[45%] ${isLeft ? "md:text-right md:pr-16 md:order-1" : "md:text-left md:pl-16"}`}>
+      <div className={`exp-card w-full pl-8 lg:pl-0 lg:w-[45%] ${isLeft ? "lg:text-right lg:pr-16 lg:order-1" : "lg:text-left lg:pl-16"}`}>
         {/* Date — mobile */}
-        <div className={`md:hidden mb-6 ${isLeft ? "mt-16" : ""}`}>
+        <div className={`lg:hidden mb-4 ${isLeft ? "mt-8" : ""}`}>
           <span className="font-mono-label text-on-background/40 uppercase tracking-[0.2em] text-xs">
             {entry.date}
           </span>
         </div>
 
-        <div className={`glass-card p-6 sm:p-10 rounded-none border-l-[1px] border-l-on-background/10 group-hover:border-l-primary ${isLeft ? "md:border-l-0 md:border-r-[1px] md:border-r-on-background/10 md:group-hover:border-l-transparent md:group-hover:border-r-primary" : ""}`}>
+        <div className={`glass-card p-6 sm:p-10 rounded-none border-l-[1px] border-l-on-background/10 group-hover:border-l-primary ${isLeft ? "lg:border-l-0 lg:border-r-[1px] lg:border-r-on-background/10 lg:group-hover:border-l-transparent lg:group-hover:border-r-primary" : ""}`}>
           <h3 className="font-headline-md text-2xl text-on-background mb-3 font-semibold">{entry.title}</h3>
           <h4 className="font-body-md text-on-background/40 mb-1 uppercase tracking-widest text-xs">{entry.company}</h4>
-          <p className={`font-body-md text-on-background/30 mb-6 sm:mb-8 text-xs font-light ${isLeft ? "text-left md:text-right" : ""}`}>{entry.meta}</p>
+          <p className={`font-body-md text-on-background/30 mb-6 sm:mb-8 text-xs font-light ${isLeft ? "text-left lg:text-right" : ""}`}>{entry.meta}</p>
 
           {/* Always-visible bullets */}
-          <ul className={`space-y-5 font-body-md text-on-background/60 font-light ${isLeft ? "text-left md:text-right" : ""}`}>
+          <ul className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light ${isLeft ? "text-left lg:text-right" : ""}`}>
             {entry.bullets.slice(0, VISIBLE_BULLETS).map((bullet, i) => (
-              <li key={i} className={`flex items-start gap-4 ${isLeft ? "md:flex-row-reverse" : ""}`}>
+              <li key={i} className={`flex items-start gap-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
                 <Check size={16} className="text-on-background/30 mt-1 shrink-0" />
                 <span>{bullet}</span>
               </li>
@@ -115,12 +115,12 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
             <>
               <ul
                 ref={extraRef}
-                className={`space-y-5 font-body-md text-on-background/60 font-light overflow-hidden h-0 opacity-0 ${isLeft ? "text-left md:text-right" : ""}`}
+                className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light overflow-hidden h-0 opacity-0 ${isLeft ? "text-left lg:text-right" : ""}`}
                 style={{ height: 0, opacity: 0 }}
               >
                 <li className="pt-5" />
                 {hiddenBullets.map((bullet, i) => (
-                  <li key={i} className={`flex items-start gap-4 ${isLeft ? "md:flex-row-reverse" : ""}`}>
+                  <li key={i} className={`flex items-start gap-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
                     <Check size={16} className="text-on-background/30 mt-1 shrink-0" />
                     <span>{bullet}</span>
                   </li>
@@ -129,7 +129,7 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
 
               <button
                 onClick={() => setExpanded((v) => !v)}
-                className={`mt-6 flex items-center gap-1.5 text-xs font-mono-label uppercase tracking-[0.15em] text-on-background/30 hover:text-primary transition-colors duration-200 ${isLeft ? "md:ml-auto" : ""}`}
+                className={`mt-6 flex items-center gap-1.5 text-xs font-mono-label uppercase tracking-[0.15em] text-on-background/30 hover:text-primary transition-colors duration-200 ${isLeft ? "lg:ml-auto" : ""}`}
               >
                 <span>{expanded ? "Show less" : `+${hiddenBullets.length} more`}</span>
                 <ChevronDown ref={chevronRef} size={13} className="shrink-0" />
@@ -141,7 +141,7 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
 
       {/* Date — desktop right side for left-aligned entries */}
       {isLeft && (
-        <div className="exp-date hidden md:block w-[45%] text-left pl-16 md:order-2">
+        <div className="exp-date hidden lg:block w-[45%] text-left pl-16 lg:order-2">
           <span className="font-mono-label text-on-background/40 uppercase tracking-[0.2em] text-sm group-hover:text-on-background transition-colors duration-300">
             {entry.date}
           </span>
@@ -218,13 +218,13 @@ export default function ExperienceSection() {
     <section
       ref={sectionRef}
       id="experience"
-      className="py-20 md:py-40 mt-12 md:mt-24 px-4 sm:px-6 lg:px-0"
+      className="py-12 lg:py-40 mt-12 lg:mt-24 px-4 sm:px-6 lg:px-0"
     >
       <h2
         ref={headingRef}
-        className="font-headline-lg text-4xl md:text-5xl text-on-background mb-16 md:mb-32 text-center tracking-tight font-extrabold"
+        className="font-headline-lg text-3xl lg:text-5xl text-on-background mb-10 lg:mb-32 text-center tracking-tight font-extrabold"
       >
-        Work <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Experience</span>
+        Work <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Experience</span>
       </h2>
 
       <div className="relative max-w-5xl mx-auto">
