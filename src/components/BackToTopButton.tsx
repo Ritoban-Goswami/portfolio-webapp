@@ -40,7 +40,7 @@ export default function BackToTopButton() {
   return (
     <motion.button
       ref={buttonRef}
-      className={`fixed bottom-8 right-8 z-50 group ${show
+      className={`fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50 group ${show
         ? "opacity-100 pointer-events-auto translate-y-0"
         : "opacity-0 pointer-events-none translate-y-4"
         }`}

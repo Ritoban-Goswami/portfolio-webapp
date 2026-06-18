@@ -6,9 +6,9 @@ import Image from "next/image";
 
 const HeroImage = forwardRef<HTMLDivElement>(function HeroImage(_, ref) {
   return (
-    <div ref={ref} className="lg:w-1/2 relative z-10 mt-12 sm:mt-20 lg:mt-0 flex justify-center lg:justify-end w-full" style={{ opacity: 0 }}>
+    <div ref={ref} className="lg:order-2 lg:w-1/2 relative z-10 mt-0 sm:mt-10 lg:mt-0 flex justify-center lg:justify-end w-full" style={{ opacity: 0 }}>
       <motion.div
-        className="relative w-full max-w-[320px] sm:max-w-[450px] md:max-w-[600px] aspect-[4/5]"
+        className="relative w-full max-w-[280px] sm:max-w-[450px] md:max-w-[600px] aspect-[4/5]"
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 10, ease: "easeInOut", repeat: Infinity }}
       >

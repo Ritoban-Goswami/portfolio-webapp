@@ -36,27 +36,27 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="py-20 md:py-40 mt-12 md:mt-24 relative px-4 sm:px-6 lg:px-0"
+      className="py-12 lg:py-40 mt-24 relative px-4 sm:px-6 lg:px-0"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center max-w-6xl mx-auto relative z-10">
         <div>
           {/* Mono overline */}
-          <span className="about-anim font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/30 mb-6 block">
+          <span className="about-anim font-mono-label text-xs uppercase tracking-[0.2em] text-on-background/30 mb-4 lg:mb-6 block">
             About Me
           </span>
 
           {/* Heading */}
-          <h2 className="about-anim font-headline-lg text-4xl md:text-5xl text-on-background font-extrabold tracking-tight mb-10">
+          <h2 className="about-anim font-headline-lg text-3xl lg:text-5xl text-on-background font-extrabold tracking-tight mb-6 lg:mb-10">
             From Physics to{" "}
-            <span className="text-on-background/40 font-cormorant italic text-[3.5rem] tracking-wide font-semibold">
+            <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold">
               Engineering.
             </span>
           </h2>
 
-          <p className="about-anim font-body-md text-lg text-on-background/60 mb-8 font-light leading-relaxed">
+          <p className="about-anim font-body-md text-sm lg:text-lg text-on-background/60 mb-5 lg:mb-8 font-light leading-relaxed">
             Self-taught engineer who transitioned from Physics to professional software development, bringing strong analytical rigour to every problem. I own the full delivery cycle — architecture, implementation, data layer, and cloud infra — across B2B marketplaces and SaaS platforms.
           </p>
-          <p className="about-anim font-body-md text-lg text-on-background/60 font-light leading-relaxed">
+          <p className="about-anim font-body-md text-sm lg:text-lg text-on-background/60 font-light leading-relaxed">
             Currently working across two product teams — a B2B wholesale marketplace and a SaaS platform — as a founding-level engineer. I thrive in fast-moving remote environments, shipping production-grade features end-to-end and mentoring engineers along the way.
           </p>
         </div>
