@@ -5,6 +5,13 @@ import { ArrowRight, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const inquiryTypes = [
+  { value: "freelance", label: "Freelance" },
+  { value: "fulltime", label: "Full-time" },
+  { value: "consulting", label: "Consulting" },
+  { value: "other", label: "Other" },
+];
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -46,13 +53,6 @@ export default function ContactForm() {
       setStatus("error");
     }
   };
-
-  const inquiryTypes = [
-    { value: "freelance", label: "Freelance" },
-    { value: "fulltime", label: "Full-time" },
-    { value: "consulting", label: "Consulting" },
-    { value: "other", label: "Other" },
-  ];
 
   if (status === "success") {
     return (

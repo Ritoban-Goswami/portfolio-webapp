@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { footerNavLinks } from "@/constants/navigation";
 
 export default function Footer() {
   return (
@@ -55,13 +56,13 @@ export default function Footer() {
           </p>
         </div>
         <nav className="flex gap-5">
-          {["About", "Experience", "Projects", "Skills", "Contact"].map((item) => (
+          {footerNavLinks.map(({ label, href }) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={href}
+              href={href}
               className="font-mono-label text-[10px] uppercase tracking-widest text-on-background/30 hover:text-on-background/70 transition-colors duration-200"
             >
-              {item}
+              {label}
             </a>
           ))}
         </nav>

@@ -1,5 +1,7 @@
 export interface ProjectDetails {
+  index: string;
   title: string;
+  shortDesc: string;
   description: string;
   tags: string[];
   challenges: string;
@@ -9,9 +11,20 @@ export interface ProjectDetails {
   image?: string;
 }
 
+export const projectOrder = [
+  "boardly",
+  "quantize",
+  "pawshots",
+  "wordle",
+] as const;
+export type ProjectKey = (typeof projectOrder)[number];
+
 export const projectData: Record<string, ProjectDetails> = {
   boardly: {
+    index: "01",
     title: "Boardly",
+    shortDesc:
+      "Real-time collaborative Kanban board with RBAC, drag-and-drop, and in-app notifications.",
     description:
       "A production-grade real-time collaborative Kanban board with multi-board support, drag-and-drop task management, role-based access control (Admin, Editor, Viewer), and in-app notifications. Built solo end-to-end.",
     tags: ["Next.js", "TypeScript", "Firebase", "Zustand", "Tailwind CSS"],
@@ -24,7 +37,10 @@ export const projectData: Record<string, ProjectDetails> = {
     image: "/boardly-preview.png",
   },
   quantize: {
+    index: "02",
     title: "quantize-colors",
+    shortDesc:
+      "Open-source npm library for color quantization, dominant extraction, and luminance palettes.",
     description:
       "An open-source npm library implementing three core algorithms — color quantization, dominant color extraction, and luminance-based palette generation — enabling dynamic theming and image compression for Node.js applications.",
     tags: ["JavaScript", "Node.js", "Canvas API", "Open Source"],
@@ -37,7 +53,10 @@ export const projectData: Record<string, ProjectDetails> = {
     image: "/quantize-preview.png",
   },
   wordle: {
+    index: "03",
     title: "Word(le) Finder",
+    shortDesc:
+      "Wordle helper that filters suggestions from positional constraints with meaning lookup.",
     description:
       "A web tool that helps Wordle players find word suggestions based on their guessed letters and feedback (green, yellow, grey). Includes meaning lookup for each suggestion and intentional wrong suggestions to preserve the game's challenge.",
     tags: [
@@ -56,7 +75,10 @@ export const projectData: Record<string, ProjectDetails> = {
     image: "/wordle-preview.gif",
   },
   pawshots: {
+    index: "04",
     title: "PawShots",
+    shortDesc:
+      "Pet gallery with bulk ZIP download, infinite scroll, and AI-powered color grouping.",
     description:
       "A sophisticated pet image gallery with bulk selection & ZIP download, real-time debounced search, advanced sorting, infinite scroll, and AI-powered color analysis using quantize-colors to group pets into 13 visual categories. Includes a favorites system, recent search history, and Web Share API integration.",
     tags: [

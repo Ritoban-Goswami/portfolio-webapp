@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
+import SectionHeading from "@/components/SectionHeading";
 
 const skills = [
   {
@@ -88,12 +86,12 @@ export default function SkillsSection() {
     >
       {/* Heading */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
-        <h2
+        <SectionHeading
           ref={headingRef}
-          className="font-headline-lg text-3xl lg:text-5xl text-on-background mb-10 lg:mb-24 text-center tracking-tight font-extrabold"
-        >
-          Technical <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Arsenal</span>
-        </h2>
+          primary="Technical"
+          italic="Arsenal"
+          className="mb-10 lg:mb-24 text-center"
+        />
       </div>
 
       {/* Marquee ticker */}

@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
+import SectionHeading from "@/components/SectionHeading";
 
 interface ExperienceEntry {
   date: string;
@@ -50,10 +48,33 @@ const experiences: ExperienceEntry[] = [
 
 const VISIBLE_BULLETS = 2;
 
+interface BulletListProps {
+  bullets: React.ReactNode[];
+  isLeft: boolean;
+  className?: string;
+}
+
+const BulletList = forwardRef<HTMLUListElement, BulletListProps>(
+  function BulletList({ bullets, isLeft, className = "" }, ref) {
+    return (
+      <ul
+        ref={ref}
+        className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light ${isLeft ? "text-left lg:text-right" : ""} ${className}`}
+      >
+        {bullets.map((bullet, i) => (
+          <li key={i} className={`flex items-start gap-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
+            <Check size={16} className="text-on-background/30 mt-1 shrink-0" />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+);
+
 function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: number }) {
   const [expanded, setExpanded] = useState(false);
   const extraRef = useRef<HTMLUListElement>(null);
-  const chevronRef = useRef<SVGSVGElement>(null);
   const isLeft = entry.align === "left";
   const hiddenBullets = entry.bullets.slice(VISIBLE_BULLETS);
 
@@ -89,30 +110,17 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
           <p className={`font-body-md text-on-background/30 mb-6 sm:mb-8 text-xs font-light ${isLeft ? "text-left lg:text-right" : ""}`}>{entry.meta}</p>
 
           {/* Always-visible bullets */}
-          <ul className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light ${isLeft ? "text-left lg:text-right" : ""}`}>
-            {entry.bullets.slice(0, VISIBLE_BULLETS).map((bullet, i) => (
-              <li key={i} className={`flex items-start gap-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
-                <Check size={16} className="text-on-background/30 mt-1 shrink-0" />
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
+          <BulletList bullets={entry.bullets.slice(0, VISIBLE_BULLETS)} isLeft={isLeft} />
 
           {/* Collapsible extra bullets */}
           {hiddenBullets.length > 0 && (
             <>
-              <ul
+              <BulletList
                 ref={extraRef}
-                className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light overflow-hidden transition-all duration-500 ease-out ${expanded ? "h-auto opacity-100" : "h-0 opacity-0"} ${isLeft ? "text-left lg:text-right" : ""}`}
-              >
-                <li className="pt-5" />
-                {hiddenBullets.map((bullet, i) => (
-                  <li key={i} className={`flex items-start gap-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
-                    <Check size={16} className="text-on-background/30 mt-1 shrink-0" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+                bullets={hiddenBullets}
+                isLeft={isLeft}
+                className={`overflow-hidden transition-all duration-500 ease-out pt-5 ${expanded ? "h-auto opacity-100" : "h-0 opacity-0"}`}
+              />
 
               <button
                 onClick={() => setExpanded((v) => !v)}
@@ -120,7 +128,6 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
               >
                 <span>{expanded ? "Show less" : `+${hiddenBullets.length} more`}</span>
                 <ChevronDown
-                  ref={chevronRef}
                   size={13}
                   className={`shrink-0 transition-transform duration-350 ease-out ${expanded ? "rotate-180" : ""}`}
                 />
@@ -211,12 +218,12 @@ export default function ExperienceSection() {
       id="experience"
       className="py-12 lg:py-40 mt-12 lg:mt-24 px-4 sm:px-6 lg:px-0"
     >
-      <h2
+      <SectionHeading
         ref={headingRef}
-        className="font-headline-lg text-3xl lg:text-5xl text-on-background mb-10 lg:mb-32 text-center tracking-tight font-extrabold"
-      >
-        Work <span className="text-on-background/40 font-cormorant italic text-[2.1rem] lg:text-[3.5rem] tracking-wide font-semibold ml-[0.4rem]">Experience</span>
-      </h2>
+        primary="Work"
+        italic="Experience"
+        className="mb-10 lg:mb-32 text-center"
+      />
 
       <div className="relative max-w-5xl mx-auto">
         <div ref={trackRef} className="timeline-track" />

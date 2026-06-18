@@ -1,18 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import Image from "next/image";
 import { FileText, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { navLinks } from "@/constants/navigation";
 
 const RESUME_URL = "https://docs.google.com/document/d/e/2PACX-1vS8C_x9MZ0LMwM09cS7lO9UBzJa9rThBJX0qI_trwRaJ8F7o58_FjjagFpuI_sfy7Mi-7KaXZeYWrig/pub";
-
-const navLinks = [
-  { label: "About", href: "#about", id: "about" },
-  { label: "Experience", href: "#experience", id: "experience" },
-  { label: "Projects", href: "#projects", id: "projects" },
-  { label: "Skills", href: "#skills", id: "skills" },
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,17 +53,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
+  useBodyScrollLock(mobileMenuOpen);
 
 
   return (
