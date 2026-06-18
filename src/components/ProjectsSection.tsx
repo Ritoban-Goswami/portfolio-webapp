@@ -12,27 +12,25 @@ gsap.registerPlugin(ScrollTrigger);
 const _projectOrder = ["boardly", "quantize", "pawshots", "wordle"] as const;
 type ProjectKey = (typeof _projectOrder)[number];
 
-const projectMeta: Record<ProjectKey, { index: string; shortDesc: string; tags: string[] }> = {
-  boardly: {
-    index: "01",
-    shortDesc: "Real-time collaborative Kanban board with RBAC, drag-and-drop, and in-app notifications.",
-    tags: ["Next.js", "TypeScript", "Firebase", "Zustand", "Tailwind CSS"],
-  },
-  quantize: {
-    index: "02",
-    shortDesc: "Open-source npm library for color quantization, dominant extraction, and luminance palettes.",
-    tags: ["JavaScript", "Node.js", "Canvas API", "Open Source"],
-  },
-  pawshots: {
-    index: "03",
-    shortDesc: "Pet gallery with bulk ZIP download, infinite scroll, and AI-powered color grouping.",
-    tags: ["React 19", "TypeScript", "Styled Components", "Context API", "Vite"],
-  },
-  wordle: {
-    index: "04",
-    shortDesc: "Wordle helper that filters suggestions from positional constraints with meaning lookup.",
-    tags: ["Next.js", "Shadcn UI", "Tailwind CSS", "Datamuse API"],
-  },
+// Helper functions to derive data from projectData
+const getProjectIndex = (key: ProjectKey): string => {
+  const indexMap: Record<ProjectKey, string> = {
+    boardly: "01",
+    quantize: "02",
+    pawshots: "03",
+    wordle: "04"
+  };
+  return indexMap[key];
+};
+
+const getProjectShortDesc = (key: ProjectKey): string => {
+  const descMap: Record<ProjectKey, string> = {
+    boardly: "Real-time collaborative Kanban board with RBAC, drag-and-drop, and in-app notifications.",
+    quantize: "Open-source npm library for color quantization, dominant extraction, and luminance palettes.",
+    pawshots: "Pet gallery with bulk ZIP download, infinite scroll, and AI-powered color grouping.",
+    wordle: "Wordle helper that filters suggestions from positional constraints with meaning lookup."
+  };
+  return descMap[key];
 };
 
 export default function ProjectsSection() {
@@ -135,7 +133,7 @@ export default function ProjectsSection() {
   }, []);
 
   const featured = projectData["boardly"];
-  const featuredMeta = projectMeta["boardly"];
+  const featuredMeta = { index: getProjectIndex("boardly"), shortDesc: getProjectShortDesc("boardly"), tags: projectData["boardly"].tags };
   const rest = (["quantize", "pawshots", "wordle"] as ProjectKey[]);
 
   return (
@@ -207,7 +205,7 @@ export default function ProjectsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {rest.map((key) => {
             const proj = projectData[key];
-            const meta = projectMeta[key];
+            const meta = { index: getProjectIndex(key), shortDesc: getProjectShortDesc(key), tags: projectData[key].tags };
             return (
               <div
                 key={key}
@@ -291,7 +289,7 @@ export default function ProjectsSection() {
               </button>
               {/* Index pinned to banner bottom-left */}
               <span className="absolute bottom-3 left-5 sm:left-8 font-cormorant italic text-4xl sm:text-6xl leading-none text-on-background/15 font-semibold select-none">
-                {projectMeta[activeProject as ProjectKey]?.index}
+                {getProjectIndex(activeProject as ProjectKey)}
               </span>
             </div>
 

@@ -57,20 +57,7 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
   const isLeft = entry.align === "left";
   const hiddenBullets = entry.bullets.slice(VISIBLE_BULLETS);
 
-  useEffect(() => {
-    if (!extraRef.current) return;
-    if (expanded) {
-      gsap.fromTo(
-        extraRef.current,
-        { height: 0, opacity: 0 },
-        { height: "auto", opacity: 1, duration: 0.5, ease: "power3.out" }
-      );
-      gsap.to(chevronRef.current, { rotation: 180, duration: 0.35, ease: "power2.out" });
-    } else {
-      gsap.to(extraRef.current, { height: 0, opacity: 0, duration: 0.4, ease: "power3.in" });
-      gsap.to(chevronRef.current, { rotation: 0, duration: 0.35, ease: "power2.out" });
-    }
-  }, [expanded]);
+  // CSS transitions handle the expand/collapse animations now
 
   return (
     <div
@@ -116,8 +103,7 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
             <>
               <ul
                 ref={extraRef}
-                className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light overflow-hidden h-0 opacity-0 ${isLeft ? "text-left lg:text-right" : ""}`}
-                style={{ height: 0, opacity: 0 }}
+                className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light overflow-hidden transition-all duration-500 ease-out ${expanded ? "h-auto opacity-100" : "h-0 opacity-0"} ${isLeft ? "text-left lg:text-right" : ""}`}
               >
                 <li className="pt-5" />
                 {hiddenBullets.map((bullet, i) => (
@@ -133,7 +119,11 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
                 className={`mt-6 flex items-center gap-1.5 text-xs font-mono-label uppercase tracking-[0.15em] text-on-background/30 hover:text-primary transition-colors duration-200 ${isLeft ? "lg:ml-auto" : ""}`}
               >
                 <span>{expanded ? "Show less" : `+${hiddenBullets.length} more`}</span>
-                <ChevronDown ref={chevronRef} size={13} className="shrink-0" />
+                <ChevronDown
+                  ref={chevronRef}
+                  size={13}
+                  className={`shrink-0 transition-transform duration-350 ease-out ${expanded ? "rotate-180" : ""}`}
+                />
               </button>
             </>
           )}

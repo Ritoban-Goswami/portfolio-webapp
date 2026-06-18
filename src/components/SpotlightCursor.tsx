@@ -15,7 +15,6 @@ export default function SpotlightCursor() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [ripples, setRipples] = useState<Ripple[]>([]);
-  const [nextId, setNextId] = useState(0);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -46,9 +45,11 @@ export default function SpotlightCursor() {
     const handleMouseEnter = () => setVisible(true);
 
     const handleMouseDown = () => {
-      const id = nextId;
-      setNextId((prev) => prev + 1);
-      setRipples((prev) => [...prev, { id, x: mouseX.get(), y: mouseY.get() }]);
+      const id = Date.now();
+      const newRipple = { id, x: mouseX.get(), y: mouseY.get() };
+      setRipples((prev) => [...prev, newRipple]);
+
+      // Auto-remove ripple after animation
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== id));
       }, 600);
@@ -69,7 +70,7 @@ export default function SpotlightCursor() {
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, nextId]);
+  }, [mouseX, mouseY]);
 
   if (isMobile) return null;
 

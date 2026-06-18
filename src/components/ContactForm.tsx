@@ -15,6 +15,10 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
@@ -72,20 +76,22 @@ export default function ContactForm() {
     <form className="flex flex-col gap-8 sm:gap-10" onSubmit={handleFormSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6">
         <input
+          name="name"
           className="w-full input-line font-body-md"
           placeholder="Your Name"
           type="text"
           required
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={handleInputChange}
         />
         <input
+          name="email"
           className="w-full input-line font-body-md"
           placeholder="Your Email"
           type="email"
           required
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={handleInputChange}
         />
       </div>
 
@@ -112,11 +118,12 @@ export default function ContactForm() {
       </div>
 
       <textarea
+        name="message"
         className="w-full input-line font-body-md min-h-[120px] sm:min-h-[140px] resize-none"
         placeholder="Tell me about your project..."
         required
         value={formData.message}
-        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+        onChange={handleInputChange}
       />
 
       {status === "error" && (

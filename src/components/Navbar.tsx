@@ -44,6 +44,7 @@ export default function Navbar() {
       const y = window.scrollY;
       setScrolled(y > 80);
 
+      // Clear active section when scrolled past skills section
       const skills = document.getElementById("skills");
       if (skills && skills.getBoundingClientRect().bottom < 0) {
         setActiveSection("");
