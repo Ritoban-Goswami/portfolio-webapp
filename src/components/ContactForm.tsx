@@ -103,6 +103,7 @@ export default function ContactForm() {
             <button
               key={value}
               type="button"
+              aria-pressed={formData.type === value}
               onClick={() => setFormData({ ...formData, type: value })}
               className={`px-4 py-2 text-xs font-mono-label uppercase tracking-wider rounded-full border transition-all duration-300 ${formData.type === value
                 ? "border-primary bg-primary/10 text-primary"

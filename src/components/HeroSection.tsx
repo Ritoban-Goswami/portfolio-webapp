@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import HeroImage from "@/components/HeroImage";
-import GlowOrb from "@/components/GlowOrb";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,6 +12,7 @@ export default function HeroSection() {
   const bodyRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const chevronRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -22,7 +22,8 @@ export default function HeroSection() {
         .fromTo(nameRef.current, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.55 }, "-=0.3")
         .fromTo(roleRef.current, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4 }, "-=0.3")
         .fromTo(bodyRef.current, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4 }, "-=0.25")
-        .fromTo(ctaRef.current, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, "-=0.2");
+        .fromTo(ctaRef.current, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, "-=0.2")
+        .fromTo(chevronRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4 }, "-=0.1");
     }, sectionRef);
 
     return () => ctx.revert();
@@ -35,7 +36,7 @@ export default function HeroSection() {
       className="min-h-[85svh] md:min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden"
     >
       <div className="grid-bg" aria-hidden="true" />
-      <GlowOrb />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/6 blur-[110px] pointer-events-none" aria-hidden="true" />
 
       {/* Mobile: image on top, text below — Desktop: side by side */}
       <div className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-center lg:justify-between h-full mt-4 lg:mt-10">
@@ -91,6 +92,19 @@ export default function HeroSection() {
         </div>
 
       </div>
+      <a
+        ref={chevronRef}
+        href="#about"
+        aria-label="Scroll to About section"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-on-background/30 hover:text-on-background/70 transition-colors duration-300"
+        style={{ opacity: 0 }}
+      >
+        <ChevronDown
+          size={24}
+          className="animate-bounce"
+          strokeWidth={1.5}
+        />
+      </a>
     </section>
   );
 }

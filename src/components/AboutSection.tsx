@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import AboutOrbs from "@/components/AboutOrbs";
+import AboutStats from "@/components/AboutStats";
 import SectionHeading from "@/components/SectionHeading";
 
 export default function AboutSection() {
@@ -59,7 +59,7 @@ export default function AboutSection() {
         </div>
 
         <div className="about-anim">
-          <AboutOrbs />
+          <AboutStats />
         </div>
       </div>
     </section>

@@ -1,50 +1,10 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import SectionHeading from "@/components/SectionHeading";
-
-interface ExperienceEntry {
-  date: string;
-  title: string;
-  company: string;
-  meta: string;
-  align: "right" | "left";
-  bullets: React.ReactNode[];
-}
-
-const experiences: ExperienceEntry[] = [
-  {
-    date: "Sep 2022 – Present",
-    title: "Software Engineer",
-    company: "Appycodes",
-    meta: "B2B Wholesale Marketplace · Remote UK",
-    align: "right",
-    bullets: [
-      <>Owned end-to-end delivery of <strong className="text-on-background font-medium">200+ production features</strong> for hundreds of thousands of active merchants across product discovery, listing management, and checkout workflows.</>,
-      <>Led Next.js App Router migration, improving page load performance by <strong className="text-on-background font-medium">32%</strong>, lifting Core Web Vitals scores platform-wide, and directly reducing bounce rate.</>,
-      <>Architected scalable microservice APIs within a <strong className="text-on-background font-medium">200+ repository AWS serverless ecosystem</strong> (Lambda, API Gateway, DynamoDB, MySQL) with zero-downtime CI/CD pipelines.</>,
-      <>Implemented real-time email status tracking via AWS SES and SQS, reducing <strong className="text-on-background font-medium">undetected delivery failures by ~90%</strong>.</>,
-      <>Integrated Stripe payments and OAuth 2.0 with role-based access control and security-hardened session management, supporting secure transactions across the full marketplace.</>,
-      <>Built Algolia-powered product discovery with dynamic faceted filters, cutting <strong className="text-on-background font-medium">average search latency by over 60%</strong>.</>,
-      <>Designed a reusable component library (Tailwind CSS + Shadcn UI), cutting <strong className="text-on-background font-medium">feature delivery time by 40%</strong>, and mentored 2–3 junior engineers through code reviews and pair programming, raising overall PR quality team-wide.</>,
-    ],
-  },
-  {
-    date: "Sep 2025 – Present",
-    title: "Full Stack Engineer",
-    company: "Tellbyte",
-    meta: "SaaS Platform · Contract · Remote US",
-    align: "left",
-    bullets: [
-      <>Joined as a founding engineer, led frontend development, and participated in hiring engineers and designers as the company scaled.</>,
-      <>Delivered <strong className="text-on-background font-medium">5–6 production applications</strong> across SaaS and client-facing domains, converting complex Figma designs into pixel-perfect, fully responsive full-stack applications.</>,
-      <>Built complex animation-heavy interfaces using Framer Motion, achieving <strong className="text-on-background font-medium">80–90+ Lighthouse scores</strong> through bundle optimisation, lazy loading, and CLS reduction.</>,
-      <>Integrated Elastic Email for transactional workflows and implemented GTM analytics pipelines covering event tracking, conversion funnels, and third-party tag management.</>,
-    ],
-  },
-];
+import { experiences, type ExperienceEntry } from "@/data/experiences";
 
 const VISIBLE_BULLETS = 2;
 
@@ -52,13 +12,15 @@ interface BulletListProps {
   bullets: React.ReactNode[];
   isLeft: boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const BulletList = forwardRef<HTMLUListElement, BulletListProps>(
-  function BulletList({ bullets, isLeft, className = "" }, ref) {
+  function BulletList({ bullets, isLeft, className = "", style }, ref) {
     return (
       <ul
         ref={ref}
+        style={style}
         className={`space-y-4 font-body-md text-sm lg:text-base text-on-background/60 font-light ${isLeft ? "text-left lg:text-right" : ""} ${className}`}
       >
         {bullets.map((bullet, i) => (
@@ -74,11 +36,19 @@ const BulletList = forwardRef<HTMLUListElement, BulletListProps>(
 
 function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: number }) {
   const [expanded, setExpanded] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
   const extraRef = useRef<HTMLUListElement>(null);
   const isLeft = entry.align === "left";
   const hiddenBullets = entry.bullets.slice(VISIBLE_BULLETS);
 
-  // CSS transitions handle the expand/collapse animations now
+  useLayoutEffect(() => {
+    if (!extraRef.current) return;
+    const measure = () => setContentHeight(extraRef.current!.scrollHeight);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(extraRef.current);
+    return () => ro.disconnect();
+  }, [hiddenBullets.length]);
 
   return (
     <div
@@ -119,7 +89,11 @@ function ExperienceCard({ entry, index }: { entry: ExperienceEntry; index: numbe
                 ref={extraRef}
                 bullets={hiddenBullets}
                 isLeft={isLeft}
-                className={`overflow-hidden transition-all duration-500 ease-out pt-5 ${expanded ? "h-auto opacity-100" : "h-0 opacity-0"}`}
+                className="overflow-hidden transition-[height,opacity] duration-500 ease-out pt-5"
+                style={{
+                  height: expanded ? contentHeight : 0,
+                  opacity: expanded ? 1 : 0,
+                }}
               />
 
               <button

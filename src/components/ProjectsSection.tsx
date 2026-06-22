@@ -156,7 +156,18 @@ export default function ProjectsSection() {
 
           {/* Image side */}
           <div className="relative lg:flex-1 min-h-[260px] lg:min-h-0 overflow-hidden bg-surface-container-high border-t border-on-background/5 lg:border-t-0 lg:border-l lg:border-on-background/5">
-            {featured.image ? (
+            {featured.video ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              >
+                <source src={`${featured.video}.webm`} type="video/webm" />
+                <source src={`${featured.video}.mp4`} type="video/mp4" />
+              </video>
+            ) : featured.image ? (
               <Image
                 src={featured.image}
                 alt={`${featured.title} preview`}
@@ -234,7 +245,19 @@ export default function ProjectsSection() {
           >
             {/* Image banner — h-40 on mobile, h-[480px] on sm+ */}
             <div className="relative w-full h-40 sm:h-[480px] bg-surface-container-high overflow-hidden shrink-0">
-              {projectData[activeProject].image ? (
+              <div className="absolute inset-0 animate-pulse bg-on-background/5" />
+              {projectData[activeProject].video ? (
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                >
+                  <source src={`${projectData[activeProject].video}.webm`} type="video/webm" />
+                  <source src={`${projectData[activeProject].video}.mp4`} type="video/mp4" />
+                </video>
+              ) : projectData[activeProject].image ? (
                 <Image
                   src={projectData[activeProject].image!}
                   alt={`${projectData[activeProject].title} preview`}

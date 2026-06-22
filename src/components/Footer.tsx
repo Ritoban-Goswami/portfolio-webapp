@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { footerNavLinks } from "@/constants/navigation";
+import { footerNavLinks, socialLinks } from "@/constants/navigation";
 
 export default function Footer() {
   return (
@@ -16,11 +16,7 @@ export default function Footer() {
           <span className="stroke-text-footer">Let&apos;s </span><span className="stroke-text-footer-red">Work</span>
         </h2>
         <div className="flex gap-6 mt-6 md:mt-8">
-          {[
-            { label: "GitHub", href: "https://github.com/Ritoban-Goswami" },
-            { label: "LinkedIn", href: "https://www.linkedin.com/in/ritoban-goswami" },
-            { label: "Email", href: "mailto:dev.ritoban.goswami@gmail.com" },
-          ].map(({ label, href }) => (
+          {socialLinks.map(({ label, href }) => (
             <a
               key={label}
               href={href}

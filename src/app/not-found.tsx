@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import SpotlightCursor from "@/components/SpotlightCursor";
 
 export default function NotFound() {
@@ -9,7 +10,7 @@ export default function NotFound() {
 
       <div className="relative min-h-screen bg-background text-on-background flex flex-col items-center justify-center overflow-hidden">
         <div className="grid-bg" aria-hidden="true" />
-        <div className="bg-glow glow-1" aria-hidden="true" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/6 blur-[110px] pointer-events-none" aria-hidden="true" />
 
         <div className="relative z-10 flex flex-col items-center text-center px-6">
           <p className="font-mono text-primary text-[text-mono-label] tracking-[0.2em] uppercase mb-6 text-sm">
@@ -32,7 +33,7 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center gap-2 bg-primary text-on-primary font-medium text-sm tracking-wide px-6 py-3 rounded-sm hover:bg-primary-container transition-colors duration-200"
           >
-            ← Back to Home
+            <ArrowLeft size={16} /> Back to Home
           </Link>
         </div>
       </div>
