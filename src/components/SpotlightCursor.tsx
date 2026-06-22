@@ -75,7 +75,7 @@ export default function SpotlightCursor() {
   if (isMobile) return null;
 
   return (
-    <div aria-hidden="true" className="hidden [@media(pointer:fine)]:block" style={{ opacity: visible ? 1 : 0, transition: "opacity 0.4s ease" }}>
+    <div aria-hidden="true" style={{ opacity: visible ? 1 : 0, transition: "opacity 0.4s ease" }}>
 
       {/* Ring — tracks with medium lag, expands on hover */}
       <motion.div

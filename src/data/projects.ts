@@ -9,6 +9,7 @@ export interface ProjectDetails {
   sourceUrl?: string;
   demoUrl?: string;
   image?: string;
+  video?: string;
 }
 
 export const projectOrder = [
@@ -34,7 +35,7 @@ export const projectData: Record<string, ProjectDetails> = {
       "Implemented a dual real-time architecture using Firestore listeners for task synchronisation and Firebase Realtime Database for live presence indicators and typing status, with optimistic UI updates and Zustand for distributed state management.",
     sourceUrl: "https://github.com/Ritoban-Goswami/boardly",
     demoUrl: "https://boardlyv1.vercel.app/",
-    image: "/boardly-preview.png",
+    image: "/boardly-preview.webp",
   },
   quantize: {
     index: "02",
@@ -72,7 +73,7 @@ export const projectData: Record<string, ProjectDetails> = {
       "Mapped green/yellow/grey feedback to Datamuse API query parameters for constrained word matching, then cross-referenced results with the Dictionary API to enrich suggestions with definitions in a single seamless flow.",
     sourceUrl: "https://github.com/Ritoban-Goswami/word.le-finder",
     demoUrl: "https://word-le-finder.vercel.app/",
-    image: "/wordle-preview.gif",
+    video: "/wordle-preview",
   },
   pawshots: {
     index: "04",
@@ -94,6 +95,6 @@ export const projectData: Record<string, ProjectDetails> = {
     solution:
       "Built a custom usePetData hook with explicit loading/error/empty states and a separate colorAnalysisLoading flag, used Context API for global selection and favorites, and cached color signatures in localStorage to avoid redundant quantize-colors processing on re-renders.",
     demoUrl: "https://pawshots.netlify.app",
-    image: "/pawshots-preview.png",
+    image: "/pawshots-preview.webp",
   },
 };

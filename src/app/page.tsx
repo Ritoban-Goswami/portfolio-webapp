@@ -1,4 +1,5 @@
 import SpotlightCursor from "@/components/SpotlightCursor";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import BackToTopButton from "@/components/BackToTopButton";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <div className="noise-overlay" aria-hidden="true" />
+      <ScrollProgressBar />
       <SpotlightCursor />
       <BackToTopButton />
 

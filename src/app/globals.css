@@ -186,7 +186,6 @@
   color: transparent;
 }
 
-
 /* Input Fields */
 .input-line {
   background: transparent;
@@ -245,6 +244,20 @@
 [class*="font-body-md"],
 [class*="font-body-lg"] {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
 }
 
 @keyframes spin-cw {

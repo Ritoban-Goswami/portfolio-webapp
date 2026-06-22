@@ -9,3 +9,9 @@ export const footerNavLinks = [
   ...navLinks,
   { label: "Contact", href: "#contact", id: "contact" },
 ] as const;
+
+export const socialLinks = [
+  { label: "GitHub", href: "https://github.com/Ritoban-Goswami" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ritoban-goswami" },
+  { label: "Email", href: "mailto:dev.ritoban.goswami@gmail.com" },
+] as const;
