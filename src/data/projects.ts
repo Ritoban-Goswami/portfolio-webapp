@@ -43,12 +43,12 @@ export const projectData: Record<string, ProjectDetails> = {
     shortDesc:
       "Open-source npm library for color quantization, dominant extraction, and luminance palettes.",
     description:
-      "An open-source npm library implementing three core algorithms — color quantization, dominant color extraction, and luminance-based palette generation — enabling dynamic theming and image compression for Node.js applications.",
+      "An open-source npm library implementing three core algorithms: color quantization, dominant color extraction, and luminance-based palette generation. It enables dynamic theming and image compression for Node.js applications.",
     tags: ["JavaScript", "Node.js", "Canvas API", "Open Source"],
     challenges:
       "Designing a flexible, zero-dependency API surface that is accurate for color quantization, efficient in Node.js environments, and works correctly across varying image formats and sizes.",
     solution:
-      "Implemented three distinct algorithms — median cut quantization, dominant color extraction, and luminance-based palette generation — exposed through a unified, tree-shakeable API with full TypeScript types.",
+      "Implemented three distinct algorithms (median cut quantization, dominant color extraction, and luminance-based palette generation), exposed through a unified, tree-shakeable API with full TypeScript types.",
     sourceUrl: "https://github.com/Ritoban-Goswami/quantize-colors",
     demoUrl: "https://www.npmjs.com/package/quantize-colors",
     image: "/quantize-preview.png",
@@ -91,7 +91,7 @@ export const projectData: Record<string, ProjectDetails> = {
       "Context API",
     ],
     challenges:
-      "Coordinating multiple async concerns — data fetching, per-image color analysis, selection state across routes, and infinite scroll pagination — without blocking the UI or causing stale state between navigations.",
+      "Coordinating multiple async concerns (data fetching, per-image color analysis, selection state across routes, and infinite scroll pagination) without blocking the UI or causing stale state between navigations.",
     solution:
       "Built a custom usePetData hook with explicit loading/error/empty states and a separate colorAnalysisLoading flag, used Context API for global selection and favorites, and cached color signatures in localStorage to avoid redundant quantize-colors processing on re-renders.",
     demoUrl: "https://pawshots.netlify.app",

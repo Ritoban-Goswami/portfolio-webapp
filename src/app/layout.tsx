@@ -23,24 +23,24 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ritoban-goswami.vercel.app"),
-  title: "Ritoban Goswami — Full-Stack Engineer",
-  description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS. Bridging the gap between physics logic and software architecture.",
+  title: "Ritoban Goswami - Full-Stack Software Engineer",
+  description: "Full-stack engineer with 4 years shipping production systems, working with React/Next.js, Node.js/FastAPI, and AWS.",
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
-    title: "Ritoban Goswami — Full-Stack Engineer",
-    description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS.",
+    title: "Ritoban Goswami - Full-Stack Software Engineer",
+    description: "Full-stack engineer with 4 years shipping production systems, working with React/Next.js, Node.js/FastAPI, and AWS.",
     url: "https://ritoban-goswami.vercel.app",
     siteName: "Ritoban Goswami",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Ritoban Goswami — Full-Stack Engineer" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Ritoban Goswami - Full-Stack Software Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ritoban Goswami — Full-Stack Engineer",
-    description: "Building high-performance, scalable web applications with a focus on React, Next.js, and AWS.",
+    title: "Ritoban Goswami - Full-Stack Software Engineer",
+    description: "Full-stack engineer with 4 years shipping production systems, working with React/Next.js, Node.js/FastAPI, and AWS.",
     images: ["/og-image.png"],
   },
 };

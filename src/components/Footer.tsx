@@ -10,7 +10,7 @@ export default function Footer() {
       {/* Big typographic statement */}
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 pt-16 md:pt-24 pb-10 md:pb-16">
         <p className="font-mono-label text-[10px] uppercase tracking-[0.25em] text-on-background/30 mb-4">
-          Based in India · Available worldwide
+          Based in India · Available for remote, hybrid, or on-site
         </p>
         <h2 className="font-headline-xl text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[10rem] font-black uppercase tracking-tight leading-[0.85] select-none">
           <span className="stroke-text-footer">Let&apos;s </span><span className="stroke-text-footer-red">Work</span>
