@@ -67,7 +67,7 @@ export default function HeroSection() {
             className="font-body-lg text-sm sm:text-base lg:text-lg text-on-background/55 max-w-sm lg:max-w-md mt-4 sm:mt-10 font-light leading-relaxed"
             style={{ opacity: 0 }}
           >
-            3+ years shipping production features end-to-end across B2B marketplaces and SaaS platforms — from React/Next.js UI through Node.js/Express.js APIs to AWS serverless infrastructure.
+            4+ years shipping production systems end-to-end, with React/Next.js UI, Node.js/FastAPI services, and AWS infrastructure. I own ambiguous, cross-functional problems from product through infra.
           </p>
 
           <div

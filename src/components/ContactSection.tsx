@@ -52,7 +52,7 @@ export default function ContactSection() {
             className="mb-4 sm:mb-6 lg:mb-8"
           />
           <p className="font-body-lg text-on-background/50 font-light text-sm sm:text-base lg:text-lg leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-md">
-            Currently open to new opportunities — freelance, full-time, or consulting. I&apos;ll get back to you within 24 hours.
+            Currently open to new opportunities, freelance, full-time, or consulting. I&apos;ll get back to you within 24 hours.
           </p>
 
           {/* Direct email — hidden on mobile to save space */}

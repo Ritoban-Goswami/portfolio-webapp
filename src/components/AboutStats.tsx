@@ -4,17 +4,18 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
 const stats = [
-  { value: "3+", label: "Years Experience", context: "Full-cycle delivery across B2B & SaaS" },
-  { value: "200+", label: "Features Shipped", context: "Production, end-to-end ownership" },
-  { value: "32%", label: "Faster Page Loads", context: "Next.js App Router migration" },
-  { value: "40%", label: "Faster Delivery", context: "Via reusable component library" },
+  { value: "5K+", label: "Merchants on Platform", context: "200+ retailers, 3,000+ orders/day" },
+  { value: "78%", label: "Auto-Approved Credit", context: "KYC engine, 65% less manual review" },
+  { value: "60%", label: "Faster Search", context: "Algolia, 420ms → 168ms autocomplete and filters" },
+  { value: "<200ms", label: "INP, Platform-Wide", context: "Google's \"Good\" Core Web Vitals" },
 ];
 
 function StatCard({ value, label, context }: { value: string; label: string; context: string }) {
   const numRef = useRef<HTMLDivElement>(null);
 
   const numeric = parseFloat(value.replace(/[^0-9.]/g, ""));
-  const suffix = value.replace(/[0-9.]/g, "");
+  const prefix = value.match(/^[^0-9.]+/)?.[0] ?? "";
+  const suffix = value.replace(/^[^0-9.]+/, "").replace(/[0-9.]/g, "");
 
   useEffect(() => {
     if (!numRef.current || isNaN(numeric)) return;
@@ -28,15 +29,18 @@ function StatCard({ value, label, context }: { value: string; label: string; con
         ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 90%", once: true },
         onUpdate: () => {
-          el.textContent = (Number.isInteger(numeric)
-            ? Math.round(obj.val).toString()
-            : obj.val.toFixed(1)) + suffix;
+          el.textContent =
+            prefix +
+            (Number.isInteger(numeric)
+              ? Math.round(obj.val).toString()
+              : obj.val.toFixed(1)) +
+            suffix;
         },
       });
     });
 
     return () => ctx.revert();
-  }, [numeric, suffix]);
+  }, [numeric, prefix, suffix]);
 
   return (
     <div className="glass-card p-6 flex flex-col justify-end min-h-[160px] group hover:border-on-background/10">

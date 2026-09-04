@@ -51,10 +51,10 @@ export default function AboutSection() {
           />
 
           <p className="about-anim font-body-md text-sm lg:text-lg text-on-background/60 mb-5 lg:mb-8 font-light leading-relaxed">
-            Self-taught engineer who transitioned from Physics to professional software development, bringing strong analytical rigour to every problem. I own the full delivery cycle — architecture, implementation, data layer, and cloud infra — across B2B marketplaces and SaaS platforms.
+            Self-taught engineer who transitioned from Physics to professional software development, bringing strong analytical rigour to unfamiliar problems. I own the full delivery cycle, from UI to services, data pipelines, and cloud infra, across B2B marketplaces and SaaS platforms.
           </p>
           <p className="about-anim font-body-md text-sm lg:text-lg text-on-background/60 font-light leading-relaxed">
-            Currently working across two product teams — a B2B wholesale marketplace and a SaaS platform — as a founding-level engineer. I thrive in fast-moving remote environments, shipping production-grade features end-to-end and mentoring engineers along the way.
+            Most recently I spent four years on Creoate&apos;s platform rebuild at Appycodes and helped stand up Tellbyte as a founding engineer. I thrive in fast-moving remote product teams, partnering across backend, growth, and platform in an Agile/Scrum environment.
           </p>
         </div>
 

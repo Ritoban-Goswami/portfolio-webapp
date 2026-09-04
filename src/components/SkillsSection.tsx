@@ -13,17 +13,17 @@ const skills = [
   {
     index: "02",
     label: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "Shadcn UI", "Framer Motion", "Radix UI", "WebSockets", "Core Web Vitals"],
+    items: ["React", "Next.js", "Tailwind CSS", "Shadcn UI", "Redux", "Framer Motion", "Radix UI", "WebSockets", "Core Web Vitals"],
   },
   {
     index: "03",
     label: "Backend",
-    items: ["Node.js", "Express.js", "REST APIs", "Microservices", "DynamoDB", "MySQL", "Redis"],
+    items: ["Node.js", "Express.js", "FastAPI", "REST APIs", "Microservices", "System Design", "DynamoDB", "MySQL", "Redis"],
   },
   {
     index: "04",
     label: "Infra & Cloud",
-    items: ["AWS Lambda", "API Gateway", "SQS", "SES", "Docker", "CI/CD", "Terraform", "Git"],
+    items: ["AWS Lambda", "API Gateway", "SQS", "SES", "Glue", "Athena", "Kubernetes", "Docker", "ECR", "Terraform", "CI/CD", "Prometheus/Grafana", "Git"],
   },
   {
     index: "05",
@@ -33,7 +33,7 @@ const skills = [
   {
     index: "06",
     label: "Integrations",
-    items: ["Stripe", "OAuth 2.0", "Algolia", "Twilio", "Elastic Email", "Strapi", "Sanity", "OpenAI API"],
+    items: ["Stripe", "OAuth 2.0", "Algolia", "HubSpot", "PostHog", "Elastic Email", "Strapi", "Sanity"],
   },
 ];
 

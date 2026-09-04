@@ -1,6 +1,6 @@
-# Ritoban Goswami — Portfolio
+# Ritoban Goswami Portfolio
 
-Personal portfolio website built with Next.js 16, React 19, and modern animation libraries. Fully componentized, server-first architecture with isolated client components for interactive elements.
+Personal portfolio for a full-stack engineer with 4 years shipping production systems (React/Next.js, Node.js/FastAPI, AWS). Built with Next.js 16, React 19, and isolated client components for animation.
 
 ## Tech Stack
 
@@ -22,28 +22,19 @@ Personal portfolio website built with Next.js 16, React 19, and modern animation
 ```
 src/
 ├── app/
-│   ├── layout.tsx        # Root layout, metadata, font loading
-│   ├── page.tsx          # Page orchestration (Server Component)
-│   └── globals.css       # Tailwind @theme tokens + global styles
-├── components/
-│   ├── Navbar.tsx         # Floating pill navbar
-│   ├── HeroSection.tsx    # Hero layout
-│   ├── AboutSection.tsx   # About text + animated orbs
-│   ├── ExperienceSection.tsx # Timeline
-│   ├── ProjectsSection.tsx   # Project cards + modal (client)
-│   ├── SkillsSection.tsx     # Skills grid
-│   ├── ContactSection.tsx    # Contact heading + form
-│   ├── Footer.tsx            # Footer with socials
-│   ├── ContactForm.tsx       # Controlled form (client)
-│   ├── SpotlightCursor.tsx   # Custom cursor (client)
-│   ├── BackToTopButton.tsx   # Scroll-aware button (client)
-│   ├── HeroImage.tsx         # Floating hero image (client)
-│   ├── AboutOrbs.tsx         # Spinning rings (client)
-│   └── GlowOrb.tsx           # Pulsing background glow (client)
+│   ├── layout.tsx            # Root layout, metadata, fonts
+│   ├── page.tsx              # Page orchestration (Server Component)
+│   ├── globals.css           # Tailwind @theme tokens + global styles
+│   ├── api/contact/route.ts  # Contact form API
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components/               # Page sections + interactive UI
+├── constants/navigation.ts   # Nav and social links
+├── data/
+│   ├── experiences.tsx       # Work timeline copy
+│   └── projects.ts           # Project showcase copy
 ├── hooks/
-│   └── (custom hooks)        # Reusable logic
-└── data/
-    └── projects.ts       # Project data with TypeScript interfaces
+└── lib/gsap.ts
 ```
 
 ## Getting Started
@@ -57,13 +48,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Features
 
-- **Responsive Design** - Mobile-first approach with optimized layouts for all devices
-- **Interactive Animations** - Smooth scroll animations, custom spotlight cursor, and floating elements
-- **Project Showcase** - Modal-based project viewer with detailed descriptions and links
-- **Contact Form** - Functional contact form with validation
-- **Performance Optimized** - Server components, optimized images, and minimal bundle size
-- **SEO Ready** - Complete metadata, Open Graph, and Twitter Card support
-- **Analytics** - Integrated Vercel Analytics and Speed Insights
+- **Responsive Design** - Mobile-first layouts
+- **Interactive Animations** - Scroll animations, spotlight cursor, timeline
+- **Work Timeline** - Appycodes / Creoate and Tellbyte, with expandable bullets
+- **Project Showcase** - Drawer with descriptions, stack, challenges, and links
+- **Contact Form** - Validated form plus direct email
+- **SEO** - Metadata, Open Graph, and Twitter cards
+- **Analytics** - Vercel Analytics and Speed Insights
 
 ## Scripts
 
@@ -79,18 +70,18 @@ npm run typecheck  # Run TypeScript type check
 
 Pre-commit hook via Husky runs on every `git commit`:
 
-- **ESLint** — auto-fixes and blocks on unfixable errors
-- **TypeScript** — full type-check, blocks on type errors
+- **ESLint** - auto-fixes and blocks on unfixable errors
+- **TypeScript** - full type-check, blocks on type errors
 
 Only staged files are checked (fast, via lint-staged).
 
-## Projects Featured
+## Content
 
-The portfolio showcases 4 key projects:
+**Experience:** Appycodes (Creoate, Sep 2022 – Aug 2026) and Tellbyte (contract, Sep 2025 – Mar 2026).
+
+**Projects:**
 
 1. **Boardly** - Real-time collaborative Kanban board with Firebase
 2. **quantize-colors** - Open-source npm library for color analysis
-3. **Word(le) Finder** - Wordle helper tool with API integration
-4. **PawShots** - Pet gallery with AI-powered color categorization
-
-Each project includes detailed descriptions, tech stacks, challenges faced, and solutions implemented.
+3. **PawShots** - Pet gallery with color categorization
+4. **Word(le) Finder** - Wordle helper with API integration

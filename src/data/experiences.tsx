@@ -9,32 +9,126 @@ export interface ExperienceEntry {
 
 export const experiences: ExperienceEntry[] = [
   {
-    date: "Sep 2022 – Present",
+    date: "Sep 2022 – Aug 2026",
     title: "Software Engineer",
     company: "Appycodes",
-    meta: "B2B Wholesale Marketplace · Remote UK",
+    meta: "Creoate · B2B Wholesale Marketplace · Remote UK",
     align: "right",
     bullets: [
-      <>Owned end-to-end delivery of <strong className="text-on-background font-medium">200+ production features</strong> for hundreds of thousands of active merchants across product discovery, listing management, and checkout workflows.</>,
-      <>Led Next.js App Router migration, improving page load performance by <strong className="text-on-background font-medium">32%</strong>, lifting Core Web Vitals scores platform-wide, and directly reducing bounce rate.</>,
-      <>Architected scalable microservice APIs within a <strong className="text-on-background font-medium">200+ repository AWS serverless ecosystem</strong> (Lambda, API Gateway, DynamoDB, MySQL) with zero-downtime CI/CD pipelines.</>,
-      <>Implemented real-time email status tracking via AWS SES and SQS, reducing <strong className="text-on-background font-medium">undetected delivery failures by ~90%</strong>.</>,
-      <>Integrated Stripe payments and OAuth 2.0 with role-based access control and security-hardened session management, supporting secure transactions across the full marketplace.</>,
-      <>Built Algolia-powered product discovery with dynamic faceted filters, cutting <strong className="text-on-background font-medium">average search latency by over 60%</strong>.</>,
-      <>Designed a reusable component library (Tailwind CSS + Shadcn UI), cutting <strong className="text-on-background font-medium">feature delivery time by 40%</strong>, and mentored 2–3 junior engineers through code reviews and pair programming, raising overall PR quality team-wide.</>,
+      <>
+        Cut average per-shipment cost by{" "}
+        <strong className="text-on-background font-medium">18%</strong> by replacing
+        Fareye with a direct DHL + UPS integration, saving about{" "}
+        <strong className="text-on-background font-medium">£12K/month</strong> in
+        logistics; built a carrier-abstraction layer with feature-flagged routing
+        and fallback, plus seller cost pass-through that protected margin on
+        multi-brand orders above a £200 MOV the company had previously absorbed in
+        full.
+      </>,
+      <>
+        Increased platform take-rate by{" "}
+        <strong className="text-on-background font-medium">140 bps</strong>{" "}
+        (6.2% → 7.6%) by redesigning UK and US seller commission (first-order vs.
+        repeat-order tiers, benchmarked against Faire/Ankorstore) across 100% of
+        platform GMV.
+      </>,
+      <>
+        Shipped production features through Creoate&apos;s 3+ year platform rebuild
+        (WordPress → microservices) on a marketplace serving{" "}
+        <strong className="text-on-background font-medium">5,000+ merchants</strong> and{" "}
+        <strong className="text-on-background font-medium">200+ retailers</strong>,
+        processing{" "}
+        <strong className="text-on-background font-medium">3,000+ orders/day</strong>
+        using React/Next.js, Node.js/FastAPI, and AWS, across backend, growth, and
+        platform teams.
+      </>,
+      <>
+        Built a rules-based KYC/credit decisioning engine with two credit providers,
+        auto-approving{" "}
+        <strong className="text-on-background font-medium">78% of applications</strong>,
+        flagging{" "}
+        <strong className="text-on-background font-medium">40% of rejects as fraud</strong>,
+        and cutting manual review time by{" "}
+        <strong className="text-on-background font-medium">65%</strong>.
+      </>,
+      <>
+        Scaled the BYF email dispatcher (AWS Glue, Athena, SES) to{" "}
+        <strong className="text-on-background font-medium">40K+ retailers/month</strong>{" "}
+        across 3 campaign types, holding bounce rate under{" "}
+        <strong className="text-on-background font-medium">1.5%</strong> and cutting
+        SES throttling incidents by{" "}
+        <strong className="text-on-background font-medium">70%</strong> with
+        quota-aware, idempotent batching and safe resume.
+      </>,
+      <>
+        Migrated the data-apis FastAPI service to Kubernetes (Docker/ECR, rebuilt
+        CI/CD, Prometheus/Grafana), moving deploys from weekly to{" "}
+        <strong className="text-on-background font-medium">daily</strong> and cutting
+        MTTR from ~90 min to{" "}
+        <strong className="text-on-background font-medium">20 min</strong>; moved a
+        core shipment-service codebase to TypeScript with AWS Lambda Powertools.
+      </>,
+      <>
+        Rebuilt the referral system on Elastic Email with domain verification,
+        lifting delivery from{" "}
+        <strong className="text-on-background font-medium">82% to 97%</strong> and
+        signups from referral links by{" "}
+        <strong className="text-on-background font-medium">25%</strong>.
+      </>,
+      <>
+        Ran the platform&apos;s first standing PostHog A/B tests on For-You-Page
+        personalisation, driving a{" "}
+        <strong className="text-on-background font-medium">9% conversion lift</strong>{" "}
+        and{" "}
+        <strong className="text-on-background font-medium">$28K incremental monthly GMV</strong>.
+      </>,
+      <>
+        Migrated Python/OpenSearch search to Algolia, cutting search latency by{" "}
+        <strong className="text-on-background font-medium">60%</strong> (420ms →
+        168ms) for autocomplete and faceted filters, and hitting Google&apos;s{" "}
+        <strong className="text-on-background font-medium">&quot;Good&quot; Core Web Vitals</strong>{" "}
+        platform-wide (sub-200ms INP, sub-0.1 CLS).
+      </>,
+      <>
+        Cut undetected transactional email failures by{" "}
+        <strong className="text-on-background font-medium">~90%</strong> with real-time
+        SES/SQS delivery tracking; integrated Stripe and OAuth 2.0 with RBAC, built
+        a HubSpot CRM sync layer, and started passwordless magic-link login.
+      </>,
+      <>
+        Reviewed code and mentored 2–3 junior engineers through pair programming,
+        raising PR quality across the team.
+      </>,
     ],
   },
   {
-    date: "Sep 2025 – Present",
+    date: "Sep 2025 – Mar 2026",
     title: "Full Stack Engineer",
     company: "Tellbyte",
     meta: "SaaS Platform · Contract · Remote US",
     align: "left",
     bullets: [
-      <>Joined as a founding engineer, led frontend development, and participated in hiring engineers and designers as the company scaled.</>,
-      <>Delivered <strong className="text-on-background font-medium">5–6 production applications</strong> across SaaS and client-facing domains, converting complex Figma designs into pixel-perfect, fully responsive full-stack applications.</>,
-      <>Built complex animation-heavy interfaces using Framer Motion, achieving <strong className="text-on-background font-medium">80–90+ Lighthouse scores</strong> through bundle optimisation, lazy loading, and CLS reduction.</>,
-      <>Integrated Elastic Email for transactional workflows and implemented GTM analytics pipelines covering event tracking, conversion funnels, and third-party tag management.</>,
+      <>
+        Joined as a founding engineer, led frontend development, and took part in
+        hiring engineers and designers as the company scaled into a small
+        cross-functional team.
+      </>,
+      <>
+        Delivered{" "}
+        <strong className="text-on-background font-medium">5–6 production applications</strong>{" "}
+        across SaaS and client-facing domains, converting complex Figma designs into
+        pixel-perfect, fully responsive full-stack apps (React/Next.js, MySQL-backed
+        Node.js APIs).
+      </>,
+      <>
+        Built RESTful APIs (Node.js/Express, MySQL) integrated with Strapi/Sanity CMS
+        and Elastic Email.
+      </>,
+      <>
+        Built animation-heavy interfaces with Framer Motion, achieving{" "}
+        <strong className="text-on-background font-medium">80–90+ Lighthouse scores</strong>{" "}
+        via bundle optimisation and CLS reduction.
+      </>,
     ],
   },
 ];
